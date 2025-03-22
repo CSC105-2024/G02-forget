@@ -1,9 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../component/Navbar';
-import { FaCircleArrowLeft } from "react-icons/fa6";
-import QuietHappy from '../img/Quiet happy.png';
-import { FaCircleArrowRight } from "react-icons/fa6";
+import QuietHappy from '../img/Quiethappy.png'
 import left from '../img/Leftt.png'
 import right from '../img/Rightt.png'
 
@@ -38,7 +36,7 @@ const ProfilePage = () => {
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-lg flex flex-row items-center  w-[60%] h-60 text-center">
-          <img src={QuietHappy} alt="Quiet happy" className= "  w-60  "  />
+          <img src={QuietHappy} alt="Quiethappy" className= "  w-60  "  />
           <p className="text-[35px]  font-bold font-[Rajdhani] mt-4 w-[100%]  text-center">You look Quite happy</p>
         </div>
         </div>
