@@ -5,7 +5,8 @@ const Navbar = () => {
     const location = useLocation();
   return (
     <>
-    <header className='bg-[#F2F2F2] drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
+    <div>
+    <header className="Navbar drop-shadow-md">
         <nav className='flex justify-between items-center px-2 ml-7'>
             <div className='flex flex-col items-center'>
                 <h2 className='text-[56px] font-medium'>YD</h2>
@@ -20,6 +21,7 @@ const Navbar = () => {
             </div>
         </nav>
     </header>
+    </div>
     </>
   )
 }

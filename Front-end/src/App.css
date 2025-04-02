@@ -1,6 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
+:root{
+  --template-background-color:#ECECEC;
+  --template-secondary-background-color:#F6F6F6;
+  --template-navbar-color:#F6F6F6;
+  --template-default-border-width:1px;
+  --template-pink-border-width:1px;
+  --template-yellow-border-width:1px;
+  --template-yellow-border-width:1px;
+}
+
 * {
   box-sizing: border-box;
   font-family: "Rajdhani", sans-serif;
+}
+
+.Background{
+  background:var(--template-background-color);
+}
+.Navbar{
+  background-color:var(--template-navbar-color);
+}
+.SecondaryBackground{
+  background:var(--template-secondary-background-color);
+}
+.defaultTemplate{
+  width: 300px;
+  height: 100px;
+  border-radius: 10px;
+  border-width:var(--template-default-border-width);
+  border-color:black;
+  background-color: #D9D9D9;
+}
+.pinkTemplate{
+  width: 300px;
+  height: 100px;
+  border-radius: 10px;
+  border-width: var(--template-pink-border-width);
+  border-color:black;
+  background-color: #FFBBBB;
+}
+.yellowTemplate{
+  width: 300px;
+  height: 100px;
+  border-radius: 10px;
+  border-width: var(--template-yellow-border-width);
+  border-color:black;
+  background-color:#FFDD78;
+}
+.orangeTemplate{
+  width: 300px;
+  height: 100px;
+  border-radius: 10px;
+  border-width: var(--template-yellow-border-width);
+  border-color: black;
+  background-color: #FFBB77;
 }
