@@ -10,19 +10,19 @@ const SignUpPage = () => {
         sm:max-md:block'>
             <div className='bg-white w-[50%] h-screen flex justify-center
             md:max-lg:w-[90%]
-            sm:max-md:bg-[#ECECEC] sm:max-md:w-[100%] sm:max-md:h-[100vh] sm:max-md:flex sm:max-md:justify-center sm:max-md:items-center
-            max-sm:bg-[#ECECEC] max-sm:w-[100%] max-sm:h-[100vh] max-sm: max-sm:flex max-sm:justify-center max-sm:items-center'>
+            sm:max-md:bg-[url(img/Background-SignUp.png)] bg-cover bg-no-repeat sm:max-md:w-[100%] sm:max-md:h-[100vh] sm:max-md:flex sm:max-md:justify-center sm:max-md:items-center
+            max-sm:bg-[url(img/Background-SignUp.png)] bg-cover bg-no-repeat max-sm:w-[100%] max-sm:h-[100vh] max-sm: max-sm:flex max-sm:justify-center max-sm:items-center'>
                 <section className='flex justify-center items-center flex-col p-1
-                sm:max-md:bg-white sm:max-md:w-[85%] sm:max-md:h-[95%] sm:max-md:rounded-[10px] sm:max-md:drop-shadow-xl
-                max-sm:bg-white max-sm:w-[85%] max-sm:h-[90%] max-sm:rounded-[10px] max-sm:drop-shadow-xl'>
+                sm:max-md:w-[85%] sm:max-md:h-[95%] sm:max-md:rounded-[10px] sm:max-md:drop-shadow-xl
+                max-sm:w-[85%] max-sm:h-[90%] max-sm:rounded-[10px] max-sm:drop-shadow-xl'>
                     <div>
                         <h2 className='text-[56px] font-medium
                         max-sm:text-[48px]
                         max-[490px]:text-[36px]'>Sign up</h2>
                     </div>
                     <div className='border-1 border-[#D9D9D9] rounded-[5px] p-[24px] w-[420px] h-[500px]
-                    sm:max-md:w-[90%]
-                    max-sm:w-[90%]
+                    sm:max-md:bg-white sm:max-md:w-[90%]
+                    max-sm:bg-white max-sm:w-[90%]
                     '>
                         <form action="">
                             <label htmlFor="" className='text-[16px] font-medium'>Username</label><br />
