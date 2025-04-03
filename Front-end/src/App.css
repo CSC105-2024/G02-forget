@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
-
 :root{
   --template-background-color:#ECECEC;
   --template-secondary-background-color:#F6F6F6;
@@ -14,7 +13,6 @@
   --template-example-2-button:#FFFFFF;
   --template-example-3-button:#FFFFFF;
 }
-
 * {
   box-sizing: border-box;
   font-family: "Rajdhani", sans-serif;
@@ -85,13 +83,17 @@
   border-color:black;
   background-color: var(--template-example-3-button);
 }
+* {
+  box-sizing: border-box;
+  font-family: "Rajdhani", sans-serif;
+}
 #list-diary {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 1000px;
   height: 400px;
-  background-color: #F6F6F6;
+  background-color:var(--template-secondary-background-color);
   box-shadow: 0 5px 7px rgba(0,0,0,0.25);
 }
 

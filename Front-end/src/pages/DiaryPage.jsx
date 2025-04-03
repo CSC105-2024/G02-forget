@@ -7,7 +7,7 @@ const DiaryPage = () => {
   return (
     <>
     <Navbar> </Navbar>
-    <div className='Background h-screen'>
+    <div className='Background h-auto min-h-screen'>
         <AddDiary></AddDiary>
         
     </div>
