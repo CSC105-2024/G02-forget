@@ -7,7 +7,7 @@ const DiaryPage = () => {
   return (
     <>
     <Navbar> </Navbar>
-    <div className='bg-[#ECECEC] h-screen'>
+    <div className='Background h-screen'>
         <AddDiary></AddDiary>
         
     </div>
