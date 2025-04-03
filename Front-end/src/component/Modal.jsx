@@ -7,8 +7,6 @@ import { MdFormatUnderlined } from "react-icons/md";
 import { FaAlignLeft } from "react-icons/fa";
 import { FaAlignCenter } from "react-icons/fa6";
 import { FaAlignRight } from "react-icons/fa";
-// Zod
-import { z } from "zod";
 
 
 export let topic = "";
@@ -22,11 +20,6 @@ export const setTextareaValueForAddDiary = (newTextareaValue) => {
 };
 
 const Modal = () => {
-
-    const diarySchema = z.object({
-        topic: z.string().min(1),
-        content: z.string().min(1)
-      });
 
     const [fontSize, setFontSize] = useState();
     const [textColor, setTextColor] = useState();
@@ -89,7 +82,7 @@ const Modal = () => {
         <div>
             <div className='flex flex-col items-center'>
                 <div className='w-200'>
-                    <input type="text" onChange={(e) => setTopic(e.target.value)} placeholder='Type your topic' className='bg-white px-2 py-2 w-[100%] text-[24px] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'/>
+                    <input type="text" required onChange={(e) => setTopic(e.target.value)} placeholder='Type your topic' className='bg-white px-2 py-2 w-[100%] text-[24px] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'/>
                 </div>
                 <div className='flex justify-evenly items-center text-[20px] w-150 mt-5 bg-white py-2 rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
                     <div className='flex items-center'>

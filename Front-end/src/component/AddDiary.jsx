@@ -7,7 +7,7 @@ import { MdNavigateBefore } from "react-icons/md";
 import { IoMdCheckmark } from "react-icons/io";
 import Mood from './Mood';
 // Import Value
-import { topic, textareaValue } from './Modal';
+import { topic, setTopicForAddDiary, textareaValue, setTextareaValueForAddDiary } from './Modal';
 import { selectMood } from './Mood';
 // Icon image
 import EditIcon from '../img/EditIcon.png';
@@ -19,6 +19,8 @@ import OrangeEmoji from '../img/OrangeEmoji.png'
 import YellowEmoji from '../img/YellowEmoji.png'
 import LightGreenEmoji from '../img/LightGreenEmoji.png'
 import GreenEmoji from '../img/GreenEmoji.png'
+// Zod
+import { z } from "zod";
 
 
 const AddDiary = () => {
@@ -36,76 +38,66 @@ const AddDiary = () => {
     }
 
     function createDiary() {
-      setMood(false);
-      setModal(false);
-      document.getElementById("message-no-diary").style.display = "none";
-      let container = document.createElement("div");
-      container.style.display = "flex";
-      container.style.justifyContent = "center";
-      container.style.height = "500px";
-      container.style.backgroundColor = "#ECECEC";
+      if (selectMood == "") {
+        alert("Please rate your mood");
+      } else {
+        setMood(false);
+        setModal(false);
+        document.getElementById("message-no-diary").style.display = "none";
+        let container = document.createElement("div");
+        container.style.display = "flex";
+        container.style.justifyContent = "center";
+        container.style.height = "500px";
+        container.style.backgroundColor = "#ECECEC";
 
-      let emoji = "";
+        let emoji = "";
 
-      if (selectMood == "red") {
-          emoji = RedEmoji;
-      } else if (selectMood == "orange") {
-          emoji = OrangeEmoji;
-      } else if (selectMood == "yellow") {
-          emoji = YellowEmoji;
-      } else if (selectMood == "lightGreen") {
-          emoji = LightGreenEmoji;
-      } else if (selectMood == "green") {
-          emoji = GreenEmoji;
-      }
+        if (selectMood == "red") {
+            emoji = RedEmoji;
+        } else if (selectMood == "orange") {
+            emoji = OrangeEmoji;
+        } else if (selectMood == "yellow") {
+            emoji = YellowEmoji;
+        } else if (selectMood == "lightGreen") {
+            emoji = LightGreenEmoji;
+        } else if (selectMood == "green") {
+            emoji = GreenEmoji;
+        }
 
-      container.innerHTML = 
-      `
-      <div id="list-diary">
-        <div>
-            <h2 id="day" className='text-[56px] font-medium'>Day 1</h2>
-        </div>
-        <div>
-          <h3 id="topic" className='text-[48px] font-medium'>${topic}</h3>
-          <textarea name="" id="text" className='bg-white px-2 py-2 w-175 h-50 text-[16px] resize-none rounded-lg' readOnly>${textareaValue}</textarea>
-          <div id="container-icon" className='flex justify-between mt-3'>
-            <div id="icon1" className='flex flex-row'>
-              <button><img id="edit" src=${EditIcon} alt="" style="width:75px;"/></button>
-              <button><img id="unlock" src=${UnlockIcon} alt="" style="width:40px;"/></button>
-            </div>
-            <div id="icon2">
-              <button><img id="bin" src=${BinIcon} alt="" style="width:40px;"/></button>
+        if (typeof(topic) == "undefined") {
+          setTopicForAddDiary("-");
+        }
+
+        if (typeof(textareaValue) == "undefined") {
+          setTextareaValueForAddDiary("");
+        }
+
+        container.innerHTML = 
+        `
+        <div id="list-diary">
+          <div>
+              <h2 id="day" className='text-[56px] font-medium'>Day 1</h2>
+          </div>
+          <div>
+            <h3 id="topic" className='text-[48px] font-medium'>${topic}</h3>
+            <textarea name="" id="text" className='bg-white px-2 py-2 w-175 h-50 text-[16px] resize-none rounded-lg' readOnly>${textareaValue}</textarea>
+            <div id="container-icon" className='flex justify-between mt-3'>
+              <div id="icon1" className='flex flex-row'>
+                <button><img id="edit" src=${EditIcon} alt="" style="width:75px;"/></button>
+                <button><img id="unlock" src=${UnlockIcon} alt="" style="width:40px;"/></button>
+              </div>
+              <div id="icon2">
+                <button><img id="bin" src=${BinIcon} alt="" style="width:40px;"/></button>
+              </div>
             </div>
           </div>
+          <div id="container-mood">
+              <img src=${emoji} alt=""/>
+          <div/>
         </div>
-        <div id="container-mood">
-            <img src=${emoji} alt=""/>
-        <div/>
-      </div>
-    `;
-      document.getElementById("container").appendChild(container);
-      // if (selectMood == "red") {
-      //     document.getElementById("container-mood").innerHTML = 
-      //     `
-      //     <img src=${RedEmoji} alt=""/>
-      //     `;
-      // } else if (selectMood == "orange") {
-      //     let image = document.createElement("img");
-      //     image.src = OrangeEmoji;
-      //     document.getElementById("container-mood").appendChild(image);
-      // } else if (selectMood == "yellow") {
-      //     let image = document.createElement("img");
-      //     image.src = YellowEmoji;
-      //     document.getElementById("container-mood").appendChild(image);
-      // } else if (selectMood == "lightGreen") {
-      //     let image = document.createElement("img");
-      //     image.src = LightGreenEmoji;
-      //     document.getElementById("container-mood").appendChild(image);
-      // } else if (selectMood == "green") {
-      //     let image = document.createElement("img");
-      //     image.src = GreenEmoji;
-      //     document.getElementById("container-mood").appendChild(image);
-      // }
+      `;
+        document.getElementById("container").appendChild(container);
+      }
     }
 
   return (
@@ -124,8 +116,10 @@ const AddDiary = () => {
       </div>
     </div>
     <div className='float-right relative right-95 top-100'>
-        {showModal && <Modal></Modal>}
-        {showModal && <button className='fixed bg-white rounded-xl text-[24px]' onClick={nextModal}><MdNavigateNext /></button>}
+      <form action="">
+          {showModal && <Modal></Modal>}
+          {showModal && <button type='submit' className='fixed bg-white rounded-xl text-[24px]' onClick={nextModal}><MdNavigateNext /></button>}
+        </form>
     </div>
     <div className=''>
        {showMood && <Mood></Mood>}
