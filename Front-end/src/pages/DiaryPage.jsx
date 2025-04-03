@@ -9,6 +9,7 @@ const DiaryPage = () => {
     <Navbar> </Navbar>
     <div className='Background h-screen'>
         <AddDiary></AddDiary>
+      
         
     </div>
     </>
