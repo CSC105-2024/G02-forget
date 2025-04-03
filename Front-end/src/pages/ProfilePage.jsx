@@ -14,7 +14,8 @@ const ProfilePage = () => {
   };
 
   return (
-      <div className="flex flex-col-reverse lg:flex-col "> 
+      <div className='Background'>
+      <div className="flex flex-col-reverse lg:flex-col h-screen"> 
       <Navbar />
       <div className="Background w-screen h-screen flex flex-col items-start p-2 lg:p-10"></div>
       <div className="Background w-screen h-screen flex flex-col items-start p-10">
@@ -22,7 +23,7 @@ const ProfilePage = () => {
         <h1 className="text-[54px] lg:text-[60px] font-medium, font-[Rajdhani]">Hello! Manow</h1>
         <p className="text-black text-[24px] lg:text-gray-600 lg:text-[30px] font-[Rajdhani]">KiminoNaWa@gmail.com</p>
         <div className="flex flex-col w-full justify-center items-center">
-        <div className="flex items-center justify-center gap-4 my-4 bg-[#f2f2f2] shadow lg:bg-[#ececec] lg:shadow-none">
+        <div className="SecondaryBackground flex items-center rounded-[10px] drop-shadow-2xl justify-center gap-4 my-4 shadow lg:bg-[#ececec] lg:shadow-none">
           
           <button className="p-3 cursor-pointer">
             <img src={left} className = "w-10" /> 
@@ -47,6 +48,7 @@ const ProfilePage = () => {
         >
           Sign out
         </button>
+      </div>
       </div>
       </div>
   );
