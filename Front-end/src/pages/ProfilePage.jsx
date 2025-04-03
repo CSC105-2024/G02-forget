@@ -19,8 +19,8 @@ const ProfilePage = () => {
   return (
       <div className="flex flex-col-reverse lg:flex-col "> 
       <Navbar />
-      
-      <div className="bg-[#ECECEC] w-screen h-screen flex flex-col items-start p-2 lg:p-10">
+      <div className="Background w-screen h-screen flex flex-col items-start p-2 lg:p-10
+      <div className="Background w-screen h-screen flex flex-col items-start p-10">
         
         <h1 className="text-[54px] lg:text-[60px] font-medium, font-[Rajdhani]">Hello! Manow</h1>
         <p className="text-black text-[24px] lg:text-gray-600 lg:text-[30px] font-[Rajdhani]">KiminoNaWa@gmail.com</p>

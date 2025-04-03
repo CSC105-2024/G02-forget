@@ -40,6 +40,7 @@ const Navbar = () => {
             </div>
         </nav>
     </header>
+    </div>
     </>
   )
 }
