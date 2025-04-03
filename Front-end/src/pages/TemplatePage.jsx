@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../component/Navbar'
 import Pic1 from '../img/NoDiary.png'
 import ChangeBackground from "../component/ChangeTemplate.jsx";
+import TemplateExample from '../component/TemplateExample.jsx';
 
 const Template = () => {
   return (
@@ -25,15 +26,9 @@ const Template = () => {
                 <div className="flex w-[600px] h-[475px] rounded-[3px] border-1 mb-10">
                   <img src={Pic1}></img>
                 </div>
-                <div className="flex w-[200px] h-[40px] bg-[#F2F2F2] rounded-[20px] border-1 items-center justify-between ">
-                  <div className="h-[20px] w-[20px] bg-[#000000] rounded-[50%] border-1 ml-3">
-                  </div>
-                  <div className="h-[20px] w-[20px] bg-[#FFFFFF] rounded-[50%] border-1">
-                  </div>
-                  <div className="h-[20px] w-[20px] bg-[#FFFFFF] rounded-[50%] border-1 mr-3">
-                 </div>
-                </div>
 
+                <TemplateExample />
+                
                 </div>
 
             </section>
