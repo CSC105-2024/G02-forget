@@ -43,7 +43,7 @@ const ProfilePage = () => {
         </div>
         <button 
           onClick={handleSignOut}
-          className="mt-6 px-4 py-2  text-[20px] font-medium font-[Rajdhani] rounded-md bg-[#ffffff] transition cursor-pointer shadow-lg"
+          className="mt-6 px-4 py-2  text-[20px] font-[Rajdhani] font-bold rounded-md bg-[red] text-white  transition cursor-pointer shadow-lg"
         >
           Sign out
         </button>
