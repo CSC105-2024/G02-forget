@@ -1,10 +1,42 @@
-import React from 'react'
+import React, { use } from 'react'
 import { useState } from 'react'
 import { IoIosAdd } from "react-icons/io";
 import Modal from './Modal';
+<<<<<<< Updated upstream
+=======
+import DiaryEntry from './DiaryEntry';
+import { MdNavigateNext } from "react-icons/md";
+import { MdNavigateBefore } from "react-icons/md";
+import { IoMdCheckmark } from "react-icons/io";
+import { RxCross2 } from "react-icons/rx";
+import Mood from './Mood';
+// Import Value
+import { topic, setTopicForAddDiary, textareaValue, setTextareaValueForAddDiary } from './Modal';
+import { selectMood, setSelectMood } from './Mood';
+// Emoji image
+import RedEmoji from '../img/RedEmoji.png'
+import OrangeEmoji from '../img/OrangeEmoji.png'
+import YellowEmoji from '../img/YellowEmoji.png'
+import LightGreenEmoji from '../img/LightGreenEmoji.png'
+import GreenEmoji from '../img/GreenEmoji.png'
+
+export let saveTopic = "";
+export const setSaveTopic = (topic) => {
+  saveTopic = topic;
+};
+
+export let saveTextareaValue = "";
+export const setSaveTextareaValue = (textareaValue) => {
+  saveTextareaValue = textareaValue;
+};
+>>>>>>> Stashed changes
 
 const AddDiary = () => {
+    const [diaries, setDiaries] = useState([]);
+    const [showMessage, setShowMessage] = useState(true);
+    const [showDiary, setShowDiary] = useState(false);
     const [showModal, setModal] = useState(false);
+<<<<<<< Updated upstream
 
   return (
     <>
@@ -13,7 +45,186 @@ const AddDiary = () => {
     </div>
     <div>
         {showModal && <Modal></Modal>}
+=======
+    const [showMood, setMood] = useState(false);
+    const [emoji, setEmoji] = useState();
+    const [createNewDiary, setCreateNewDiary] = useState(true);
+    const [currentId, setCurrentId] = useState()
+
+    const toggleLock = (id) => {
+      setDiaries(prev =>
+        prev.map(diary =>
+          diary.id === id ? { ...diary, lock: !diary.lock } : diary
+        )
+      );
+    };
+
+    const deleteDiary = (id) => {
+      setDiaries((prev) => prev.filter((diary) => diary.id !== id || diary.lock));
+      if (diaries.length === 1 || diaries.length === 0) {
+        setShowMessage(true);
+        setShowDiary(false);
+      }
+    };
+
+    const handleDiary = (diary) => {
+      setCurrentId(diary.id);
+      console.log(diary.topic);
+      setSaveTopic(diary.topic);
+      setSaveTextareaValue(diary.text);
+      setCreateNewDiary(false);
+      setModal(true);
+      
+    }
+
+    const editDiary = () => {
+      // setDiaryTopic(diary.topic);
+      // console.log(diary.topic);
+      // setSaveTopic(diaryTopic);
+
+      setDiaries(prev =>
+        prev.map(diary =>
+          diary.id === currentId ? { ...diary, topic: topic, text: textareaValue} : diary
+        )
+      );
+      setSaveTopic("");
+      setSaveTextareaValue("");
+      setMood(false);
+      setModal(false);
+    };
+    
+    function exit() {
+      if (createNewDiary) {
+        setMood(false);
+        setModal(false);
+        setSaveTopic("");
+        setSaveTextareaValue("");
+        setSelectMood("");
+      } else {
+        setMood(false);
+        setModal(false);
+      }
+    }
+
+    function nextModal() {
+      setMood(true);
+      setModal(false);
+      setSaveTopic(topic);
+      setSaveTextareaValue(textareaValue);
+    }
+
+    function prevtModal() {
+      setMood(false);
+      setModal(true);
+    }
+
+    function createDiary() {
+      if (selectMood == "") {
+        alert("Please rate your mood");
+      } else {
+        setMood(false);
+        setModal(false);
+
+        let collectEmoji = "";
+
+        if (selectMood == "red") {
+            collectEmoji = RedEmoji;
+            setEmoji(collectEmoji);
+        } else if (selectMood == "orange") {
+            collectEmoji = OrangeEmoji;;
+            setEmoji(collectEmoji);
+        } else if (selectMood == "yellow") {
+            collectEmoji = YellowEmoji;
+            setEmoji(collectEmoji);
+        } else if (selectMood == "lightGreen") {
+            collectEmoji = LightGreenEmoji;
+            setEmoji(collectEmoji);
+        } else if (selectMood == "green") {
+            collectEmoji = GreenEmoji;
+            setEmoji(collectEmoji);    
+        }
+
+        if (topic == "") {
+          setTopicForAddDiary("-");
+        }
+
+        if (typeof(textareaValue) == "undefined") {
+          setTextareaValueForAddDiary("");
+        }
+
+        if (createNewDiary) {
+          let newDiary = {
+            id: Date.now(),
+            topic: topic,
+            text: textareaValue,
+            emoji: collectEmoji,
+            lock: false,
+          }
+          setDiaries(prev => [...prev, newDiary]);
+        }
+
+        setShowDiary(true);
+        setShowMessage(false)
+
+        setSaveTopic("");
+        setSaveTextareaValue("");
+        setSelectMood("");
+        console.log(`Diaries = ${diaries.length}`);
+        
+      }
+      
+    }
+
+  return (
+    <>
+    <div className='flex justify-between items-center mb-10'>
+      <div className='flex items-center gap-10 mt-5 ml-15 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
+      <MdNavigateBefore className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
+        <div className='text-center'>
+            <h2 className='text-[56px] font-medium'>Month</h2>
+            <p className='text-[24px] -mt-6'>2025</p>
+        </div>
+      <MdNavigateNext className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
+      </div>
+      <div className=''>
+          <button onClick={() => {setModal(true);setCreateNewDiary(true)}} className='flex items-center mt-5 mr-15 text-[24px] font-medium bg-white px-3 py-1 rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)] cursor-pointer'><IoIosAdd />Add</button>
+      </div>
     </div>
+    <div className='float-right relative right-95 top-100'>
+        {showModal && <Modal></Modal>}
+        {showModal && <button className='fixed z-40 bg-white rounded-xl text-[24px] cursor-pointer' onClick={nextModal}><MdNavigateNext /></button>}
+        {showModal && <button className='fixed z-40 right-50 top-15 text-white text-[48px] cursor-pointer' onClick={exit}><RxCross2 /></button>}
+    </div>
+    <div className=''>
+       {showMood && <Mood></Mood>}
+       <div className='float-right relative right-110 top-100'>
+        {showMood && <button className='fixed z-40 bg-white rounded-xl text-[24px]' onClick={prevtModal}><MdNavigateBefore /></button>}
+       </div>
+       <div className='float-right relative right-95 top-100'>
+        {showMood && <button className='fixed z-40 bg-white rounded-xl text-[24px]' onClick={createNewDiary ? createDiary : editDiary}><IoMdCheckmark /></button>}
+        {showMood && <button className='fixed z-40 right-50 top-15 text-white text-[48px] cursor-pointer' onClick={exit}><RxCross2 /></button>}
+       </div>
+    </div>
+    <div id='container' className='flex flex-col items-center bg-[#ECECEC]'>
+      {showMessage && <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f]'>No Diary In This Month</h1>}
+      {showDiary && diaries.map(diary => (
+        <DiaryEntry
+        key={diary.id}
+        diary={diary}
+        toggleLock={toggleLock}
+        deleteDiary={deleteDiary}
+        editDiary={editDiary}
+        handleDiary={handleDiary}
+        topic={diary.topic}
+        textareaValue={diary.text}
+        emoji={diary.emoji}
+        lock={diary.lock}
+        ></DiaryEntry>
+      ))}
+>>>>>>> Stashed changes
+    </div>
+    <button onClick={() => console.log(diaries)
+    }>check</button>
     </>
   )
 }
