@@ -34,7 +34,7 @@ const SignUpPage = () => {
                             <label htmlFor="" className='text-[16px] font-medium '>Confirm password</label><br />
                             <input type="text" className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px]' placeholder='Enter your password'/><br />
                             <button type="submit"className='w-[100%] bg-black text-white rounded-[5px] py-[5px] font-medium mt-[36px] cursor-pointer transition duration-700
-                            hover:bg-[#3A3A3A]'>Sign in</button>
+                            hover:bg-[#3A3A3A]'>Sign up</button>
                         </form>
                     </div>
                     <Link to="/" className='mr-90 my-5 sm:max-md:ml-190 max-sm:ml-140'>
