@@ -18,18 +18,10 @@ import YellowEmoji from '../img/YellowEmoji.png'
 import LightGreenEmoji from '../img/LightGreenEmoji.png'
 import GreenEmoji from '../img/GreenEmoji.png'
 
-export let saveTopic = "";
-export const setSaveTopic = (topic) => {
-  saveTopic = topic;
-};
-
-export let saveTextareaValue = "";
-export const setSaveTextareaValue = (textareaValue) => {
-  saveTextareaValue = textareaValue;
-};
-
 const AddDiary = () => {
     const [diaries, setDiaries] = useState([]);
+    const [saveTopic, setSaveTopic] = useState();
+    const [saveTextareaValue, setSaveTextareaValue] = useState();
     const [showMessage, setShowMessage] = useState(true);
     const [showDiary, setShowDiary] = useState(false);
     const [showModal, setModal] = useState(false);
@@ -152,7 +144,7 @@ const AddDiary = () => {
             setEmoji(collectEmoji);    
         }
 
-        if (topic == "") {
+        if (typeof(topic) == "undefined") {
           setTopicForAddDiary("-");
         }
 
@@ -200,7 +192,10 @@ const AddDiary = () => {
       </div>
     </div>
     <div className='float-right relative right-95 top-100'>
-        {showModal && <Modal></Modal>}
+        {showModal && <Modal
+        saveTextareaValue={saveTextareaValue}
+        saveTopic={saveTopic}
+        ></Modal>}
         {showModal && <button className='fixed z-40 bg-white rounded-xl text-[24px] cursor-pointer' onClick={nextModal}><MdNavigateNext /></button>}
         {showModal && <button className='fixed z-40 right-50 top-15 text-white text-[48px] cursor-pointer' onClick={exit}><RxCross2 /></button>}
     </div>

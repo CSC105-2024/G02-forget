@@ -6,8 +6,6 @@ import { MdFormatUnderlined } from "react-icons/md";
 import { FaAlignLeft } from "react-icons/fa";
 import { FaAlignCenter } from "react-icons/fa6";
 import { FaAlignRight } from "react-icons/fa";
-// Import from AddDiray file
-import { saveTopic, saveTextareaValue } from './AddDiary';
 
 export let topic = "";
 export const setTopicForAddDiary = (newTopic) => {
@@ -20,7 +18,7 @@ export const setTextareaValueForAddDiary = (newTextareaValue) => {
 };
 
 
-const Modal = () => {
+const Modal = ({saveTextareaValue, saveTopic}) => {
 
     const [fontSize, setFontSize] = useState();
     const [textColor, setTextColor] = useState();
