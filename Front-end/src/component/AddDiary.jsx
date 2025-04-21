@@ -19,6 +19,7 @@ import OrangeEmoji from '../img/OrangeEmoji.png'
 import YellowEmoji from '../img/YellowEmoji.png'
 import LightGreenEmoji from '../img/LightGreenEmoji.png'
 import GreenEmoji from '../img/GreenEmoji.png'
+import Emptybox from '../img/EmptyBox.png'
 // Zod
 
 
@@ -47,7 +48,6 @@ const AddDiary = () => {
         container.style.display = "flex";
         container.style.justifyContent = "center";
         container.style.height = "500px";
-        container.style.backgroundColor = "#ECECEC";
 
         let emoji = "";
 
@@ -102,7 +102,7 @@ const AddDiary = () => {
   return (
     <>
     <div className='flex justify-between items-center mb-10'>
-      <div className='flex items-center gap-10 mt-5 ml-15 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
+      <div className='SecondaryBackground flex items-center gap-10 mt-5 ml-15 px-4 rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
       <MdNavigateBefore className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
         <div className='text-center'>
             <h2 className='text-[56px] font-medium'>Month</h2>
@@ -130,7 +130,10 @@ const AddDiary = () => {
        </div>
     </div>
     <div id='container'>
-      <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f]'>No Diary In This Month</h1>
+      <h1 id='message-no-diary' className='flex flex-col items-center text-[64px] text-center text-[#5f5f5f]'>No Diary In This Month
+        <img src={Emptybox}>
+        </img>
+      </h1>
     </div>
     </>
   )
