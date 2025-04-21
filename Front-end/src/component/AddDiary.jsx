@@ -187,7 +187,7 @@ const AddDiary = () => {
   return (
     <>
     <div className='flex justify-between items-center mb-10'>
-      <div className='flex items-center gap-10 mt-5 ml-15 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
+      <div className='flex SecondaryBackground items-center gap-10 mt-5 ml-15 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
       <MdNavigateBefore className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
         <div className='text-center'>
             <h2 className='text-[56px] font-medium'>Month</h2>
@@ -196,7 +196,7 @@ const AddDiary = () => {
       <MdNavigateNext className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
       </div>
       <div className=''>
-          <button onClick={() => {setModal(true);setCreateNewDiary(true)}} className='flex items-center mt-5 mr-15 text-[24px] font-medium bg-white px-3 py-1 rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)] cursor-pointer'><IoIosAdd />Add</button>
+          <button onClick={() => {setModal(true);setCreateNewDiary(true)}} className='flex SecondaryBackground items-center mt-5 mr-15 text-[24px] font-medium bg-white px-3 py-1 rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)] cursor-pointer'><IoIosAdd />Add</button>
       </div>
     </div>
     <div className='float-right relative right-95 top-100'>
@@ -214,7 +214,7 @@ const AddDiary = () => {
         {showMood && <button className='fixed z-40 right-50 top-15 text-white text-[48px] cursor-pointer' onClick={exit}><RxCross2 /></button>}
        </div>
     </div>
-    <div id='container' className='flex flex-col items-center bg-[#ECECEC]'>
+    <div id='container' className='flex Background flex-col items-center bg-[#ECECEC]'>
       {showMessage && <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f]'>No Diary In This Month</h1>}
       {showDiary && diaries.map(diary => (
         <DiaryEntry
