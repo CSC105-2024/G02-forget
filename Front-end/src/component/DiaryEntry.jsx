@@ -5,18 +5,7 @@ import LockIcon from '../img/LockIcon.png';
 import UnlockIcon from '../img/UnlockIcon.png';
 import BinIcon from '../img/BinIcon.png';
 
-const DiaryEntry = ({diary, toggleLock, deleteDiary, editDiary, handleDiary, topic, textareaValue, emoji, lock}) => {
-    const[remove, setRemove] = useState(true);
-
-    // if (!lock) {
-    //     document.getElementById("unlock").src = LockIcon;
-    //     document.getElementById("unlock").style.backgroundColor = "white";
-    //     console.log("lock");                   
-    // } else {
-    //     document.getElementById("unlock").src = UnlockIcon;
-    //     document.getElementById("unlock").style.backgroundColor = "black";
-    //     console.log("unlock");        
-    // }
+const DiaryEntry = ({diary, toggleLock, deleteDiary, handleDiary, topic, textareaValue, emoji, lock}) => {
     
   return (
     <>

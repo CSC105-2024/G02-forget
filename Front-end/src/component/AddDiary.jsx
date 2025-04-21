@@ -1,9 +1,7 @@
-import React, { use } from 'react'
+import React from 'react'
 import { useState } from 'react'
 import { IoIosAdd } from "react-icons/io";
 import Modal from './Modal';
-<<<<<<< Updated upstream
-=======
 import DiaryEntry from './DiaryEntry';
 import { MdNavigateNext } from "react-icons/md";
 import { MdNavigateBefore } from "react-icons/md";
@@ -29,23 +27,12 @@ export let saveTextareaValue = "";
 export const setSaveTextareaValue = (textareaValue) => {
   saveTextareaValue = textareaValue;
 };
->>>>>>> Stashed changes
 
 const AddDiary = () => {
     const [diaries, setDiaries] = useState([]);
     const [showMessage, setShowMessage] = useState(true);
     const [showDiary, setShowDiary] = useState(false);
     const [showModal, setModal] = useState(false);
-<<<<<<< Updated upstream
-
-  return (
-    <>
-    <div className='flex justify-end'>
-        <button onClick={() => {setModal(true)}} className='flex items-center mt-5 mr-15 text-[24px] font-medium bg-white px-3 py-1 rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)] cursor-pointer'><IoIosAdd />Add</button>
-    </div>
-    <div>
-        {showModal && <Modal></Modal>}
-=======
     const [showMood, setMood] = useState(false);
     const [emoji, setEmoji] = useState();
     const [createNewDiary, setCreateNewDiary] = useState(true);
@@ -69,41 +56,62 @@ const AddDiary = () => {
 
     const handleDiary = (diary) => {
       setCurrentId(diary.id);
-      console.log(diary.topic);
       setSaveTopic(diary.topic);
       setSaveTextareaValue(diary.text);
+      setSelectMood(diary.emoji)
+      console.log(`handle: ${diary.text}`);
+      console.log(`handle: ${diary.emoji}`);
+      
       setCreateNewDiary(false);
       setModal(true);
       
     }
 
     const editDiary = () => {
-      // setDiaryTopic(diary.topic);
-      // console.log(diary.topic);
-      // setSaveTopic(diaryTopic);
+      console.log(`before edit: ${textareaValue}`);
+      
+      let collectEmoji = "";
+
+      if (selectMood == "red") {
+          collectEmoji = RedEmoji;
+          setEmoji(collectEmoji);
+      } else if (selectMood == "orange") {
+          collectEmoji = OrangeEmoji;;
+          setEmoji(collectEmoji);
+      } else if (selectMood == "yellow") {
+          collectEmoji = YellowEmoji;
+          setEmoji(collectEmoji);
+      } else if (selectMood == "lightGreen") {
+          collectEmoji = LightGreenEmoji;
+          setEmoji(collectEmoji);
+      } else if (selectMood == "green") {
+          collectEmoji = GreenEmoji;
+          setEmoji(collectEmoji);    
+      } else if (collectEmoji == "") {
+          collectEmoji = selectMood;
+      }
 
       setDiaries(prev =>
         prev.map(diary =>
-          diary.id === currentId ? { ...diary, topic: topic, text: textareaValue} : diary
+          diary.id === currentId ? { ...diary, topic: topic, text: textareaValue, emoji: collectEmoji} : diary
         )
       );
+      console.log(`after edit: ${textareaValue}`);
       setSaveTopic("");
       setSaveTextareaValue("");
+      setSelectMood("");
       setMood(false);
       setModal(false);
     };
     
     function exit() {
-      if (createNewDiary) {
-        setMood(false);
-        setModal(false);
-        setSaveTopic("");
-        setSaveTextareaValue("");
-        setSelectMood("");
-      } else {
-        setMood(false);
-        setModal(false);
-      }
+      setMood(false);
+      setModal(false);
+      setSaveTopic("");
+      setSaveTextareaValue("");
+      setSelectMood("");
+      setMood(false);
+      setModal(false);
     }
 
     function nextModal() {
@@ -165,7 +173,8 @@ const AddDiary = () => {
 
         setShowDiary(true);
         setShowMessage(false)
-
+        console.log(`done: ${textareaValue}`);
+        
         setSaveTopic("");
         setSaveTextareaValue("");
         setSelectMood("");
@@ -221,7 +230,6 @@ const AddDiary = () => {
         lock={diary.lock}
         ></DiaryEntry>
       ))}
->>>>>>> Stashed changes
     </div>
     <button onClick={() => console.log(diaries)
     }>check</button>
