@@ -20,7 +20,6 @@ import YellowEmoji from '../img/YellowEmoji.png'
 import LightGreenEmoji from '../img/LightGreenEmoji.png'
 import GreenEmoji from '../img/GreenEmoji.png'
 // Zod
-import { z } from "zod";
 
 
 const AddDiary = () => {
