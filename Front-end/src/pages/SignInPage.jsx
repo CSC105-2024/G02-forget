@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import BackgroundSignIn from '../img/Background-SignIn.png';
+import { FiEye } from "react-icons/fi";
+import { FiEyeOff } from "react-icons/fi";
 
 const SignInPage = () => {
   return (
@@ -32,7 +34,7 @@ const SignInPage = () => {
                             <label htmlFor="" className='text-[16px] font-medium'>Username or Email</label><br />
                             <input type="text" className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] mb-[24px]'/><br />
                             <label htmlFor="" className='text-[16px] font-medium '>Password</label><br />
-                            <input type="text" className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px]'/><br />
+                            <input type="password" className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px]'/><br />
                             <button type="submit"className='w-[100%] bg-black text-white rounded-[5px] py-[5px] font-medium mt-[36px] cursor-pointer transition duration-700
                             hover:bg-[#3A3A3A]'>Sign in</button>
                         </form>
