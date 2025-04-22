@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import BackgroundSignIn from '../img/Background-SignIn.png';
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
+import { GoEyeClosed } from "react-icons/go";
 
 const SignInPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <>
         <div className='flex flex-row
@@ -51,9 +54,49 @@ const SignInPage = () => {
                     </Link>
                 </section>
             </div>
+            <div className='border-1 border-[#D9D9D9] rounded-[5px] p-[24px] w-[420px] h-[500px]
+              sm:max-md:bg-white sm:max-md:w-[90%]
+              max-sm:bg-white max-sm:w-[90%]'
+            >
+              <form action="">
+                <label className='text-[16px] font-medium'>Username or Email</label><br />
+                <input type="text" className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] mb-[24px]' /><br />
+
+                <label className='text-[16px] font-medium'>Password</label><br />
+                <div className='relative mb-[24px]'>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] pr-[40px]'/>
+                  <button
+                    type='button'
+                    onClick={() => setShowPassword(!showPassword)}
+                    className='absolute top-1/2 right-[10px] transform -translate-y-1/2 text-sm text-gray-600'>
+                    {showPassword ? <FiEye className='text-[25px]'/> : <GoEyeClosed className='text-[25px]'/>}
+                  </button>
+                </div>
+                <button type="submit" className='w-[100%] bg-black text-white rounded-[5px] py-[5px] font-medium mt-[36px] cursor-pointer transition duration-700
+                  hover:bg-[#3A3A3A]'>Sign in</button>
+              </form>
+
+              <p className='mt-[28px] text-[16px] underline font-medium cursor-pointer'>Forgot password?</p>
+              <p className='mt-[36px] text-[16px] text-center'>
+                Don't have an account? <br className='hidden max-sm:block' />
+                <Link to="/signup" className='underline font-bold cursor-pointer'>Sign up for free</Link>
+              </p>
+            </div>
+
+            <Link to="/" className='ml-90 my-5 max-sm:ml-50'>
+              <div className='flex flex-row items-center float-right cursor-pointer
+                sm:max-md:w-[100%]'>
+                <FaArrowLeft className='mr-[5px] text-sm' />
+                <p className='text-[20px] font-medium mx-auto'>Back</p>
+              </div>
+            </Link>
+          </section>
         </div>
+      </div>
     </>
   )
 }
 
-export default SignInPage
+export default SignInPage;

@@ -6,11 +6,16 @@ import AddDiary from '../component/AddDiary'
 const DiaryPage = () => {
   return (
     <>
-    <div className='max-sm:flex max-sm:flex-col-reverse'>
-      <Navbar> </Navbar>
-      <div className='Background h-auto min-h-screen
-      max-sm:h-100'>
+    <div className='flex flex-col-reverse lg:flex-col'>
+      <nav className='h-0'>
+      <Navbar></Navbar>
+      </nav>
+      <div className='Background h-auto h-screen'>
+        <div className='flex h-screen flex-col-reverse justify-end 
+        lg:flex-col
+        lg:mt-[100px]'>
         <AddDiary></AddDiary>
+        </div>
       </div>
     </div>
     </>

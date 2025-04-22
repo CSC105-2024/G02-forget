@@ -17,6 +17,7 @@ import OrangeEmoji from '../img/OrangeEmoji.png'
 import YellowEmoji from '../img/YellowEmoji.png'
 import LightGreenEmoji from '../img/LightGreenEmoji.png'
 import GreenEmoji from '../img/GreenEmoji.png'
+import Emptybox from '../img/EmptyBox.png'
 
 export let saveTopic = "";
 export const setSaveTopic = (topic) => {
@@ -197,7 +198,7 @@ const AddDiary = () => {
   return (
     <>
     <div className='flex justify-between items-center mb-10'>
-      <div className='flex justify-between items-center w-100 h-25 mt-5 ml-15 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]
+      <div className='flex SecondaryBackground justify-between items-center w-100 h-25 mt-5 ml-15 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]
       md:max-lg:
       sm:max-md:w-75 sm:max-md:h-20
       max-sm:w-75 max-sm:h-20'>
@@ -214,11 +215,13 @@ const AddDiary = () => {
         </div>
       <MdNavigateNext onClick={nextMonth} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
       </div>
-      <div className=''>
-          <button onClick={() => {setModal(true);setCreateNewDiary(true)}} className='flex items-center mt-5 mr-15 text-[24px] font-medium bg-white px-3 py-1 rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)] cursor-pointer'><IoIosAdd />Add</button>
+      <div className='addButton'>
+          <button onClick={() => {setModal(true);setCreateNewDiary(true)}} className='
+          flex SecondaryBackground items-center mt-5 mr-15 text-[24px] font-medium bg-white 
+          px-3 py-1 rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)] cursor-pointer'><IoIosAdd />Add</button>
       </div>
     </div>
-    <div className='float-right relative right-95 top-100'>
+    <div className='float-right relative left-[80%] top-100'>
         {showModal && <Modal></Modal>}
         {showModal && <button className='fixed z-40 bg-white rounded-xl text-[24px] cursor-pointer' onClick={nextModal}><MdNavigateNext /></button>}
         {showModal && <button className='fixed z-40 right-50 top-15 text-white text-[48px] cursor-pointer' onClick={exit}><RxCross2 /></button>}
@@ -234,8 +237,8 @@ const AddDiary = () => {
        </div>
     </div>
     <div id='container' className='flex flex-col items-center bg-[#ECECEC]'>
-      {showMessage && <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f]
-      max-sm:text-[48px]'>No Diary In This Month</h1>}
+      {showMessage && <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f] max-sm:text-[48px]'>No Diary In This Month</h1>}
+      {showMessage && <img src={Emptybox}></img>}
       {showDiary && diaries.map(diary => (
         <DiaryEntry
         key={diary.id}
@@ -252,8 +255,6 @@ const AddDiary = () => {
         ></DiaryEntry>
       ))}
     </div>
-    {/* <button onClick={() => console.log(diaries)
-    }>check</button> */}
     </>
   )
 }
