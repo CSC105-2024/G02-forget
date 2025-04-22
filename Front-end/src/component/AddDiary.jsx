@@ -220,6 +220,7 @@ const AddDiary = () => {
     </div>
     <div id='container' className='flex Background flex-col items-center bg-[#ECECEC]'>
       {showMessage && <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f]'>No Diary In This Month</h1>}
+      {showMessage && <img id='message-no-diary' src={Emptybox}></img>}
       {showDiary && diaries.map(diary => (
         <DiaryEntry
         key={diary.id}
@@ -237,7 +238,7 @@ const AddDiary = () => {
       ))}
     </div>
     <button onClick={() => console.log(diaries)
-    }>check</button>
+    }></button>
     </>
   )
 }
