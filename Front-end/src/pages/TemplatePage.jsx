@@ -17,7 +17,7 @@ const Template = () => {
               >
 
           <section className='flex justify-evenly items-center h-[800px] p-2 bg-white rounded-[10px] drop-shadow-xl
-                              max-sm:flex-col-reverse max-sm:h-[700px] w-[98%] ml-[1%] mt-2 lg:p-[12px] rounded-[10px] max-sm:h-[600px] w-[90%] lg:ml-[5%]'>
+                              max-sm:flex-col-reverse max-sm:h-[700px] w-[95%] ml-[1%] mt-2 lg:p-[12px] rounded-[10px] max-sm:h-[600px] w-[90%] lg:ml-[5%]'>
 
               <ChangeBackground />
 
