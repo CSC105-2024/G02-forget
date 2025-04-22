@@ -18,7 +18,6 @@ const Template = () => {
               sm:max-md:w-[100%]
               max-sm:w-[100%]"
               >
-
           <section className='flex justify-evenly items-center h-[90%] p-2 bg-white rounded-[10px] drop-shadow-xl
                               max-sm:flex-col-reverse w-[98%] ml-[1%] mt-2 lg:p-[12px] rounded-[10px] max-sm:h-[600px] 
                               lg:w-[90%] lg:h-[700px] lg:ml-[5%] lg:mr-[5%]'>
@@ -26,7 +25,6 @@ const Template = () => {
               <ChangeBackground />
 
               <div className="flex flex-col items-center justify-center">
-
                 <div className="flex w-[30%px] h-[20%px] rounded-[3px] border-1 mb-10 lg:w-[600px] lg:h-[475px] lg:rounded-[3px] border-1 mb-10">
                   <img src={Pic1}></img>
                 </div>
