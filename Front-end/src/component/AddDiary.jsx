@@ -204,7 +204,7 @@ const AddDiary = () => {
     </div>
     <div className='float-right relative right-95 top-100'>
         {showModal && <Modal></Modal>}
-        {showModal && <button className='fixed z-40 bg-white rounded-xl text-[24px] cursor-pointer' onClick={nextModal}><MdNavigateNext /></button>}
+        {showModal && <button className='fixed z-40 bg-white rounded-xl left-[80%] top-[80%] text-[24px] cursor-pointer' onClick={nextModal}><MdNavigateNext /></button>}
         {showModal && <button className='fixed z-40 right-50 top-15 text-white text-[48px] cursor-pointer' onClick={exit}><RxCross2 /></button>}
     </div>
     <div className=''>
