@@ -7,7 +7,7 @@ const DiaryPage = () => {
   return (
     <>
     <div className='flex flex-col-reverse lg:flex-col'><Navbar></Navbar>
-    <div className='Background h-auto min-h-screen'>
+    <div className='flex flex-col-reverse Background h-auto min-h-screen md:flex-col'>
         <AddDiary></AddDiary>
         
     </div></div>

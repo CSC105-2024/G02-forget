@@ -23,7 +23,7 @@ const Template = () => {
 
               <div className="flex flex-col items-center justify-center">
 
-                <div className="flex w-[300px] h-[400px] rounded-[3px] border-1 mb-10 lg:w-[600px] lg:h-[475px] lg:rounded-[3px] border-1 mb-10">
+                <div className="flex w-[350px] h-[400px] rounded-[3px] border-1 max-sm:mb-2 lg:w-[600px] lg:h-[475px] lg:rounded-[3px] border-1 mb-10">
                   <img src={Pic1}></img>
                 </div>
 
