@@ -17,6 +17,7 @@ import OrangeEmoji from '../img/OrangeEmoji.png'
 import YellowEmoji from '../img/YellowEmoji.png'
 import LightGreenEmoji from '../img/LightGreenEmoji.png'
 import GreenEmoji from '../img/GreenEmoji.png'
+import Emptybox from '../img/EmptyBox.png'
 
 export let saveTopic = "";
 export const setSaveTopic = (topic) => {
