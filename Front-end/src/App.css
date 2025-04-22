@@ -28,32 +28,32 @@
   background:var(--template-secondary-background-color);
 }
 .defaultTemplate{
-  width: 300px;
-  height: 100px;
+  width: 170px;
+  height: 80px;
   border-radius: 10px;
   border-width:var(--template-default-border-width);
   border-color:black;
   background-color: #D9D9D9;
 }
 .pinkTemplate{
-  width: 300px;
-  height: 100px;
+  width: 170px;
+  height: 80px;
   border-radius: 10px;
   border-width: var(--template-pink-border-width);
   border-color:black;
   background-color: #FFBBBB;
 }
 .yellowTemplate{
-  width: 300px;
-  height: 100px;
+  width: 170px;
+  height: 80px;
   border-radius: 10px;
   border-width: var(--template-yellow-border-width);
   border-color:black;
   background-color:#FFDD78;
 }
 .orangeTemplate{
-  width: 300px;
-  height: 100px;
+  width: 170px;
+  height: 80px;
   border-radius: 10px;
   border-width: var(--template-orange-border-width);
   border-color: black;

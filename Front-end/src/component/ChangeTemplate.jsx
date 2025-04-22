@@ -34,14 +34,14 @@ const ChangeTemplate = () => {
   };
 
   return (
-    <div className="templateButtons flex flex-col gap-5">
-      <button className="defaultTemplate" onClick={() => changeColor("#ECECEC","#F6F6F6","#F2F2F2",1)}>
+    <div className="grid grid-cols-2 gap-4 p-4 justify-items-center lg:grid-cols-1 lg:flex lg:flex-col lg:gap-5 lg:items-center">
+      <button className="defaultTemplate w-[100px] h-[100px] lg:w-[200px] lg:h-[200px] rounded-lg" onClick={() => changeColor("#ECECEC","#F6F6F6","#F2F2F2",1)}>
       </button>
-      <button className="pinkTemplate" onClick={() => changeColor("#FFACAC","#FFD2D2","#FFBBBB",2)}>
+      <button className="pinkTemplate w-[100px] h-[100px] lg:w-[200px] lg:h-[200px] rounded-lg" onClick={() => changeColor("#FFACAC","#FFD2D2","#FFBBBB",2)}>
       </button>
-      <button className="yellowTemplate" onClick={() => changeColor("#FFD558","#FFE59A","#FFDD78",3)}>
+      <button className="yellowTemplate w-[100px] h-[100px] lg:w-[200px] lg:h-[200px] rounded-lg" onClick={() => changeColor("#FFD558","#FFE59A","#FFDD78",3)}>
       </button>
-      <button className="orangeTemplate" onClick={() => changeColor("#FFB163","#FFD4A9","#FFBB77",4)}>
+      <button className="orangeTemplate w-[100px] h-[100px] lg:w-[200px] lg:h-[200px] rounded-lg" onClick={() => changeColor("#FFB163","#FFD4A9","#FFBB77",4)}>
       </button>
     </div>
   );
