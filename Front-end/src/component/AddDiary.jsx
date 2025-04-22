@@ -38,7 +38,16 @@ const AddDiary = () => {
     const [emoji, setEmoji] = useState();
     const [createNewDiary, setCreateNewDiary] = useState(true);
     const [currentId, setCurrentId] = useState()
+    const [currentMonth, setCurrentMonth] = useState(new Date());
 
+    function prevMonth() {
+      setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() - 1));
+    }
+
+    function nextMonth() {
+      setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() + 1));
+    }
+    
     const toggleLock = (id) => {
       setDiaries(prev =>
         prev.map(diary =>
@@ -181,7 +190,6 @@ const AddDiary = () => {
         setSaveTopic("");
         setSaveTextareaValue("");
         setSelectMood("");
-        console.log(day.getDate());
         
       }
       
@@ -190,13 +198,22 @@ const AddDiary = () => {
   return (
     <>
     <div className='flex justify-between items-center mb-10'>
-      <div className='flex SecondaryBackground items-center gap-10 mt-5 ml-15 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
-      <MdNavigateBefore className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
+      <div className='flex SecondaryBackground justify-between items-center w-100 h-25 mt-5 ml-15 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]
+      md:max-lg:
+      sm:max-md:w-75 sm:max-md:h-20
+      max-sm:w-75 max-sm:h-20'>
+      <MdNavigateBefore onClick={prevMonth} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
         <div className='text-center'>
-            <h2 className='text-[56px] font-medium'>Month</h2>
-            <p className='text-[24px] -mt-6'>2025</p>
+            <h2 className='text-[56px] font-medium
+            sm:max-md:text-[40px]
+            max-sm:text-[40px]'>
+            {currentMonth.toLocaleString('default', { month: 'long'})}</h2>
+            <p className='text-[24px] -mt-6
+            sm:max-md:-mt-4
+            max-sm:-mt-4'>
+              {currentMonth.toLocaleString('default', {year: 'numeric' })}</p>
         </div>
-      <MdNavigateNext className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
+      <MdNavigateNext onClick={nextMonth} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
       </div>
       <div className='addButton'>
           <button onClick={() => {setModal(true);setCreateNewDiary(true)}} className='
@@ -219,8 +236,8 @@ const AddDiary = () => {
         {showMood && <button className='fixed z-40 right-50 top-15 text-white text-[48px] cursor-pointer' onClick={exit}><RxCross2 /></button>}
        </div>
     </div>
-    <div id='container' className='flex Background flex-col items-center bg-[#ECECEC]'>
-      {showMessage && <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f]'>No Diary In This Month</h1>}
+    <div id='container' className='flex flex-col items-center bg-[#ECECEC]'>
+      {showMessage && <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f] max-sm:text-[48px]'>No Diary In This Month</h1>}
       {showMessage && <img src={Emptybox}></img>}
       {showDiary && diaries.map(diary => (
         <DiaryEntry
@@ -238,8 +255,6 @@ const AddDiary = () => {
         ></DiaryEntry>
       ))}
     </div>
-    <button onClick={() => console.log(diaries)
-    }></button>
     </>
   )
 }
