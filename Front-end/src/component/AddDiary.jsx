@@ -161,9 +161,12 @@ const AddDiary = () => {
           setTextareaValueForAddDiary("");
         }
 
+        let day = new Date();
+
         if (createNewDiary) {
           let newDiary = {
             id: Date.now(),
+            day: day.getDate(),
             topic: topic,
             text: textareaValue,
             emoji: collectEmoji,
@@ -174,12 +177,11 @@ const AddDiary = () => {
 
         setShowDiary(true);
         setShowMessage(false)
-        console.log(`done: ${textareaValue}`);
         
         setSaveTopic("");
         setSaveTextareaValue("");
         setSelectMood("");
-        console.log(`Diaries = ${diaries.length}`);
+        console.log(day.getDate());
         
       }
       
@@ -202,7 +204,7 @@ const AddDiary = () => {
           px-3 py-1 rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)] cursor-pointer'><IoIosAdd />Add</button>
       </div>
     </div>
-    <div className='float-right relative right-95 top-100'>
+    <div className='float-right relative left-[80%] top-100'>
         {showModal && <Modal></Modal>}
         {showModal && <button className='fixed z-40 bg-white rounded-xl text-[24px] cursor-pointer' onClick={nextModal}><MdNavigateNext /></button>}
         {showModal && <button className='fixed z-40 right-50 top-15 text-white text-[48px] cursor-pointer' onClick={exit}><RxCross2 /></button>}
@@ -219,6 +221,7 @@ const AddDiary = () => {
     </div>
     <div id='container' className='flex Background flex-col items-center bg-[#ECECEC]'>
       {showMessage && <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f]'>No Diary In This Month</h1>}
+      {showMessage && <img src={Emptybox}></img>}
       {showDiary && diaries.map(diary => (
         <DiaryEntry
         key={diary.id}
@@ -227,6 +230,7 @@ const AddDiary = () => {
         deleteDiary={deleteDiary}
         editDiary={editDiary}
         handleDiary={handleDiary}
+        day={diary.day}
         topic={diary.topic}
         textareaValue={diary.text}
         emoji={diary.emoji}
@@ -234,6 +238,8 @@ const AddDiary = () => {
         ></DiaryEntry>
       ))}
     </div>
+    <button onClick={() => console.log(diaries)
+    }></button>
     </>
   )
 }
