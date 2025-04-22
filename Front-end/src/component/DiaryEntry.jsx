@@ -1,21 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // Icon image
 import EditIcon from '../img/EditIcon.png';
 import LockIcon from '../img/LockIcon.png';
 import UnlockIcon from '../img/UnlockIcon.png';
 import BinIcon from '../img/BinIcon.png';
 
-const DiaryEntry = ({diary, toggleLock, deleteDiary, handleDiary, topic, textareaValue, emoji, lock}) => {
-    
+const DiaryEntry = ({diary, toggleLock, deleteDiary, handleDiary, topic, day, textareaValue, emoji, lock}) => {
+    const [textarea, setTextarea] = useState();
+    useEffect(() => {
+        setTextarea(textareaValue)
+    },[textareaValue])
   return (
     <>
     <div id="list-diary" className="flex justify-evenly items-center w-[1000px] h-[400px] bg-[#F6F6F6] mb-15 drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]">
         <div>
-            <h2 id="day" className='text-[56px] font-medium'>Day 1</h2>
+            <h2 id="day" className='text-[56px] font-medium'>Day {day}</h2>
         </div>
         <div>
             <h3 id="topic" className='text-[48px] font-medium'>{topic}</h3>
-            <textarea name="" id="text" className='bg-white p-[5px] w-175 h-50 text-[16px] resize-none rounded-lg' readOnly>{textareaValue}</textarea>
+            <textarea name="" id="text" value={textarea} onChange={(e) => setTextarea(e.target.value)} className='bg-white p-[5px] w-175 h-50 text-[16px] resize-none rounded-lg' readOnly></textarea>
             <div id="container-icon" className='flex justify-between mt-[10px]'>
                 <div id="icon1" className='flex flex-row'>
                     <button onClick={() => {handleDiary(diary)}}><img id="edit" src={EditIcon} alt="" className='w-[75px] bg-white rounded-[10%] mr-[20px] cursor-pointer drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'/></button>
