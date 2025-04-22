@@ -160,9 +160,12 @@ const AddDiary = () => {
           setTextareaValueForAddDiary("");
         }
 
+        let day = new Date();
+
         if (createNewDiary) {
           let newDiary = {
             id: Date.now(),
+            day: day.getDate(),
             topic: topic,
             text: textareaValue,
             emoji: collectEmoji,
@@ -173,12 +176,11 @@ const AddDiary = () => {
 
         setShowDiary(true);
         setShowMessage(false)
-        console.log(`done: ${textareaValue}`);
         
         setSaveTopic("");
         setSaveTextareaValue("");
         setSelectMood("");
-        console.log(`Diaries = ${diaries.length}`);
+        console.log(day.getDate());
         
       }
       
@@ -224,6 +226,7 @@ const AddDiary = () => {
         deleteDiary={deleteDiary}
         editDiary={editDiary}
         handleDiary={handleDiary}
+        day={diary.day}
         topic={diary.topic}
         textareaValue={diary.text}
         emoji={diary.emoji}
