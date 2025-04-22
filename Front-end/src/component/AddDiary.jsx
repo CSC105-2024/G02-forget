@@ -203,7 +203,7 @@ const AddDiary = () => {
           <button onClick={() => {setModal(true);setCreateNewDiary(true)}} className='flex SecondaryBackground items-center mt-5 mr-15 text-[24px] font-medium bg-white px-3 py-1 rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)] cursor-pointer'><IoIosAdd />Add</button>
       </div>
     </div>
-    <div className='float-right relative right-95 top-100'>
+    <div className='float-right relative left-[80%] top-100'>
         {showModal && <Modal></Modal>}
         {showModal && <button className='fixed z-40 bg-white rounded-xl text-[24px] cursor-pointer' onClick={nextModal}><MdNavigateNext /></button>}
         {showModal && <button className='fixed z-40 right-50 top-15 text-white text-[48px] cursor-pointer' onClick={exit}><RxCross2 /></button>}
@@ -220,7 +220,7 @@ const AddDiary = () => {
     </div>
     <div id='container' className='flex Background flex-col items-center bg-[#ECECEC]'>
       {showMessage && <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f]'>No Diary In This Month</h1>}
-      {showMessage && <img id='message-no-diary' src={Emptybox}></img>}
+      {showMessage && <img src={Emptybox}></img>}
       {showDiary && diaries.map(diary => (
         <DiaryEntry
         key={diary.id}
