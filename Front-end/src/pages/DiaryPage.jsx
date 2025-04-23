@@ -11,7 +11,9 @@ const DiaryPage = () => {
       <Navbar></Navbar>
       </nav>
       <div className='Background h-auto h-screen'>
-        <div className='flex h-screen flex-col-reverse justify-end 
+        <div className='flex h-screen justify-end 
+        lg:h-auto
+        lg:justify-start
         lg:flex-col
         lg:mt-[100px]'>
         <AddDiary></AddDiary>
