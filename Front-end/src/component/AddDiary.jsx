@@ -196,8 +196,8 @@ const AddDiary = () => {
 
   return (
     <>
-    <div className='flex justify-between items-center h-0 mb-10'>
-      <div className='flex justify-between items-center w-100 h-25 mt-45 ml-15 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]
+    <div className='flex justify-between items-center mb-10'>
+      <div className='flex SecondaryBackground justify-between items-center w-100 h-25 mt-5 ml-15 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]
       md:max-lg:
       sm:max-md:w-75 sm:max-md:h-20
       max-sm:w-75 max-sm:h-20'>
@@ -236,8 +236,8 @@ const AddDiary = () => {
        </div>
     </div>
     <div id='container' className='flex flex-col items-center bg-[#ECECEC]'>
-      {showMessage && <h1 id='message-no-diary' className='text-[64px] mt-45 text-center text-[#5f5f5f]
-      max-sm:text-[48px]'>No Diary In This Month</h1>}
+      {showMessage && <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f] max-sm:text-[48px]'>No Diary In This Month</h1>}
+      {showMessage && <img src={Emptybox}></img>}
       {showDiary && diaries.map(diary => (
         <DiaryEntry
         key={diary.id}
