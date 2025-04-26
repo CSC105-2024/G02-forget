@@ -11,13 +11,13 @@ const Navbar = () => {
   return (
     <>
     <header className='Navbar -my-16 lg:my-0 drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
-        <nav className='flex justify-between items-center px-2 py-2'>
+        <nav className='flex z-40 justify-between items-center px-2 py-2'>
             <div className='hidden flex flex-col items-center lg:block ml-10'>
                 <h2 className='text-[56px] font-medium text-center'>YD</h2>
                 <p className='text-[20px] font-light -mt-5 text-center'>Your Diary</p>
             </div>
             
-            <div className=' mr-20 lg:block hidden  '>  
+            <div className=' z-40 mr-20 lg:block hidden  '>  
                 <NavLink to="/diary" className={`${location.pathname.startsWith("/diary") ? "font-bold" : "font-normal"}
                 mr-10 text-[24px] font-medium`}>Diary</NavLink>
                 <NavLink to="/template" className={`${location.pathname === "/template" ? "font-bold" : "font-normal"}
