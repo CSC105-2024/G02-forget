@@ -25,7 +25,7 @@ const Template = () => {
               <ChangeBackground />
 
               <div className="flex flex-col items-center justify-center">
-                <div className="flex w-[30%px] h-[20%px] rounded-[3px] border-1 mb-10 lg:w-[600px] lg:h-[475px] lg:rounded-[3px] border-1 mb-10">
+                <div className="flex w-[90%] rounded-[3px] border-1 mb-10 lg:w-[600px] lg:h-[475px] lg:rounded-[3px] border-1 mb-10">
                   <img src={Pic1}></img>
                 </div>
 

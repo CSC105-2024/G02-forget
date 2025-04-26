@@ -28,7 +28,7 @@ const Navbar = () => {
                 <NavLink to="/diary" className={`
                 mr-10 text-[24px]`}>
                     <img className="w-15"src={bookNav}></img>
-                    <img className={`${location.pathname.startsWith("/diary") ? "" : "hidden"} w-10 py-1`} src={bar}></img>
+                    <img className={`${location.pathname.startsWith("/diary") ? "" : "hidden"} w-15 py-1`} src={bar}></img>
                 </NavLink>
                 <NavLink to="/template" className={`
                 mr-10 text-[24px] `}>
