@@ -12,7 +12,7 @@ const DiaryEntry = ({diary, toggleLock, deleteDiary, handleDiary, topic, day, te
     },[textareaValue])
   return (
     <>
-    <div id="list-diary" className="flex justify-evenly items-center w-[1000px] h-[400px] bg-[#F6F6F6] mb-15 drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]">
+    <div id="list-diary" className="flex justify-evenly items-center w-[1000px] h-[400px] bg-[#F6F6F6] mb-15 drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)] max-sm:w-100">
         <div>
             <h2 id="day" className='text-[56px] font-medium'>Day {day}</h2>
         </div>
