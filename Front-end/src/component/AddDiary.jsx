@@ -189,8 +189,8 @@ const AddDiary = () => {
 
   return (
     <>
-    <div className ='flex flex-col justify-center h-screen lg:h-[content-max]'>
-    <div className='flex justify-between items-center mb-10 -mt-100 hidden lg:flex'>
+    <div className ='flex flex-col h-screen lg:h-50'>
+    <div className='flex justify-between items-center hidden lg:flex'>
       <div className='flex justify-between items-center w-100 h-25 mt-5 ml-15 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
       <MdNavigateBefore className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
         <div className='text-center'>
@@ -207,28 +207,31 @@ const AddDiary = () => {
     </div>
     <div className='addButton flex justify-end lg:hidden'>
           <button onClick={() => {setModal(true);setCreateNewDiary(true)}} className='
-          flex SecondaryBackground items-center mt-5 mr-15 text-[24px] font-medium bg-white 
+          flex SecondaryBackground items-center mt-100 mr-10 text-[24px] font-medium bg-white 
           px-3 py-1 rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)] cursor-pointer'><IoIosAdd />Add</button>
       </div>
     </div>
-    <div className='float-right relative right-95 top-100'>
+    <div className='float-right relative left-270 top-110 max-sm:left-90 max-sm:top-90'>
         {showModal && <Modal></Modal>}
         {showModal && <button className='fixed z-40 bg-white rounded-xl text-[24px] left-cursor-pointer' onClick={nextModal}><MdNavigateNext /></button>}
-        {showModal && <button className='fixed z-40 right-50 top-15 text-white text-[48px] cursor-pointer' onClick={exit}><RxCross2 /></button>}
+        {showModal && <button className='fixed z-40 right-50 top-35 text-white text-[48px] cursor-pointer max-sm:right-5 ' onClick={exit}><RxCross2 /></button>}
     </div>
     <div className=''>
        {showMood && <Mood></Mood>}
-       <div className='float-right relative right-110 top-100'>
+       <div className='float-right relative right-80 top-100 max-sm:right-25 max-sm:top-105'>
         {showMood && <button className='fixed z-40 bg-white rounded-xl text-[24px]' onClick={prevtModal}><MdNavigateBefore /></button>}
        </div>
-       <div className='float-right relative right-95 top-100'>
+       <div className='float-right relative right-70 top-100 max-sm:right-15 max-sm:top-105'>
         {showMood && <button className='fixed z-40 bg-white rounded-xl text-[24px]' onClick={createNewDiary ? createDiary : editDiary}><IoMdCheckmark /></button>}
-        {showMood && <button className='fixed z-40 right-50 top-15 text-white text-[48px] cursor-pointer' onClick={exit}><RxCross2 /></button>}
+        {showMood && <button className='fixed z-40 right-50 top-35 text-white text-[48px] cursor-pointer max-sm:right-5' onClick={exit}><RxCross2 /></button>}
        </div>
     </div>
-    <div id='container' className='flex Background flex-col-reverse items-center bg-[#ECECEC]'>
-      {showMessage && <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f]'>No Diary In This Month</h1>}
-      {showMessage && <img src={Emptybox}></img>}
+    <div id='container' className='flex Background flex-col-reverse items-center bg-[#ECECEC] lg:flex-col'>
+      <div className='flex items-center flex-col'>
+        {showMessage && <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f] max-sm:text-[36px] '>No Diary In This Month</h1>}
+        {showMessage && <img src={Emptybox} className='max-sm:w-30 '></img>}
+      </div>
+      
       {showDiary && diaries.map(diary => (
         <DiaryEntry
         key={diary.id}
@@ -245,7 +248,7 @@ const AddDiary = () => {
         ></DiaryEntry>
       ))}
       <div className='flex justify-between items-center mb-10 lg:hidden '>
-      <div className='flex justify-between items-center w-100 h-25 mt-5 ml-15 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
+      <div className='flex justify-between items-center w-90 h-25 mt-5 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
       <MdNavigateBefore className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
         <div className='text-center'>
             <h2 className='text-[56px] font-medium'>Month</h2>
