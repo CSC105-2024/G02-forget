@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../component/Navbar'
-import Pic1 from '../img/NoDiary.png'
+import Pic1 from '../img/Ex1Default.png'
 import ChangeBackground from "../component/ChangeTemplate.jsx";
 import TemplateExample from '../component/TemplateExample.jsx';
 
@@ -26,7 +26,7 @@ const Template = () => {
 
               <div className="flex flex-col items-center justify-center">
                 <div className="flex w-[90%] rounded-[3px] border-1 mb-10 lg:w-[600px] lg:h-[475px] lg:rounded-[3px] border-1 mb-10">
-                  <img src={Pic1}></img>
+                  <img id='examplePic' src={Pic1}></img>
                 </div>
 
                 <TemplateExample />

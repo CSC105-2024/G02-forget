@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
 :root{
   --template-background-color:#ECECEC;
   --template-secondary-background-color:#F6F6F6;
@@ -12,6 +13,8 @@
   --template-example-1-button:#000000;
   --template-example-2-button:#FFFFFF;
   --template-example-3-button:#FFFFFF;
+  
+  --template-example-1-pic:
 }
 * {
   box-sizing: border-box;
