@@ -12,7 +12,7 @@ const DiaryEntry = ({diary, toggleLock, deleteDiary, handleDiary, topic, day, te
     },[textareaValue])
   return (
     <>
-    <div id="list-diary" className="flex justify-evenly items-center w-[1000px] h-[400px] bg-[#F6F6F6] mb-15">
+    <div id="list-diary" className="flex max-sm:flex-col max-sm:w-[90%] max-sm:h-auto justify-evenly items-center w-[1000px] h-[400px] bg-[#F6F6F6] mb-15">
         <div>
             <h2 id="day" className='text-[56px] font-medium'>Day {day}</h2>
         </div>
@@ -31,7 +31,7 @@ const DiaryEntry = ({diary, toggleLock, deleteDiary, handleDiary, topic, day, te
                 </div>
             </div>
         </div>
-        <div id="container-mood" className='flex max-sm:absolute justify-center items-center bg-white border-[4px] right-0 top-25 border-[#b8b8b8] rounded-[100%] w-[100px] h-[100px] -ml-[100px] mb-[175px]'>
+        <div id="container-mood" className='flex max-sm:absolute justify-center items-center bg-white border-[4px] right-0 lg:top-25 border-[#b8b8b8] rounded-[100%] w-[100px] h-[100px] -ml-[100px] max-sm:mb-[50px] lg:mb-[175px]'>
             <img src={emoji} alt=""/>
         </div>
     </div>

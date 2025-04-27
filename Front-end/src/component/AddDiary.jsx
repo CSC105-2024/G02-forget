@@ -198,7 +198,7 @@ const AddDiary = () => {
 
   return (
     <>
-    <div className ='flex flex-col h-screen lg:h-50'>
+    <div className ='flex flex-col lg:h-50'>
 
     <div className='flex z-40 mt-20 top-10 justify-between items-center hidden lg:flex'>
       
@@ -238,7 +238,7 @@ const AddDiary = () => {
         {showMood && <button className='fixed z-40 right-50 top-35 text-white text-[48px] cursor-pointer max-sm:right-5' onClick={exit}><RxCross2 /></button>}
        </div>
     </div>
-    <div id='container' className='flex Background flex-col-reverse max-sm:mt-45 items-center bg-[#ECECEC] lg:flex-col'>
+    <div id='container' className='flex Background max-sm:mt-45 items-center bg-[#ECECEC] flex-col'>
       <div className='flex items-center flex-col'>
         {showMessage && <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f] max-sm:text-[36px] '>No Diary In This Month</h1>}
         {showMessage && <img src={Emptybox} className='max-sm:w-30 '></img>}

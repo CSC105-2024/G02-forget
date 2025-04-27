@@ -10,8 +10,9 @@ const Navbar = () => {
     const location = useLocation();
   return (
     <>
-    <header className='Navbar fixed w-full max-sm:bottom-5 lg:my-0 drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
-        <nav className='flex z-40 justify-between items-center px-2 py-2'>
+    <header className='Navbar fixed z-35 w-full max-sm:bottom-5 lg:my-0 drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
+        <nav className='flex justify-between items-center px-2 py-2'>
+            
             <div className='max-sm:hidden flex flex-col items-center lg:block ml-10'>
                 <h2 className='text-[56px] font-medium text-center'>YD</h2>
                 <p className='text-[20px] font-light -mt-5 text-center'>Your Diary</p>
