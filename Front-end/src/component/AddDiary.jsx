@@ -17,7 +17,6 @@ import OrangeEmoji from '../img/OrangeEmoji.png'
 import YellowEmoji from '../img/YellowEmoji.png'
 import LightGreenEmoji from '../img/LightGreenEmoji.png'
 import GreenEmoji from '../img/GreenEmoji.png'
-import Emptybox from '../img/EmptyBox.png'
 
 export let saveTopic = "";
 export const setSaveTopic = (topic) => {
@@ -48,6 +47,14 @@ const AddDiary = () => {
       setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() + 1));
     }
 
+    function prevMonth() {
+      setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() - 1));
+    }
+
+    function nextMonth() {
+      setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() + 1));
+    }
+    
     const toggleLock = (id) => {
       setDiaries(prev =>
         prev.map(diary =>
@@ -190,7 +197,6 @@ const AddDiary = () => {
         setSaveTopic("");
         setSaveTextareaValue("");
         setSelectMood("");
-        console.log(day.getDate());
         
       }
       
@@ -278,8 +284,6 @@ const AddDiary = () => {
       </div>
     </div>
     </div>
-    <button onClick={() => console.log(diaries)
-    }></button>
     </>
   )
 }

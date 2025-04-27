@@ -149,12 +149,26 @@
   height: 100px;
   margin-left: -100px;
   margin-bottom: 175px;
+  
+  @media only screen and (max-width: 600px) {
+    width:60%;
+  }
+  @media only screen and (min-width: 1200px) {
+    width: 100px;
+  }
 }
 
 #container-icon {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+  
+  @media only screen and (max-width: 600px) {
+    width:60%;
+  }
+  @media only screen and (min-width: 1200px) {
+    width: 1000px;
+  }
 }
 
 #icon1 {
