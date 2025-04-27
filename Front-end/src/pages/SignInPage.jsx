@@ -60,19 +60,20 @@ const SignInPage = () => {
             >
               <form action="">
                 <label className='text-[16px] font-medium'>Username or Email</label><br />
-                <input type="text" className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] mb-[24px]' /><br />
+                <input type="text" className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] mb-[24px]' placeholder='Enter your Email or Username'/><br />
 
                 <label className='text-[16px] font-medium'>Password</label><br />
                 <div className='relative mb-[24px]'>
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] pr-[40px]'/>
                   <button
                     type='button'
                     onClick={() => setShowPassword(!showPassword)}
                     className='absolute top-1/2 right-[10px] transform -translate-y-1/2 text-sm text-gray-600'>
                     {showPassword ? <FiEye className='text-[25px]'/> : <GoEyeClosed className='text-[25px]'/>}
                   </button>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] pr-[40px]'
+                    placeholder='Enter your password'/>
                 </div>
                 <button type="submit" className='w-[100%] bg-black text-white rounded-[5px] py-[5px] font-medium mt-[36px] cursor-pointer transition duration-700
                   hover:bg-[#3A3A3A]'>Sign in</button>
