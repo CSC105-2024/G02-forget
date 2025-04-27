@@ -10,9 +10,9 @@ const Navbar = () => {
     const location = useLocation();
   return (
     <>
-    <header className='Navbar -my-16 lg:my-0 drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
+    <header className='Navbar fixed w-full max-sm:bottom-5 lg:my-0 drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
         <nav className='flex z-40 justify-between items-center px-2 py-2'>
-            <div className='hidden flex flex-col items-center lg:block ml-10'>
+            <div className='max-sm:hidden flex flex-col items-center lg:block ml-10'>
                 <h2 className='text-[56px] font-medium text-center'>YD</h2>
                 <p className='text-[20px] font-light -mt-5 text-center'>Your Diary</p>
             </div>
@@ -24,7 +24,7 @@ const Navbar = () => {
                 mr-10 text-[24px] font-medium`}>Template</NavLink>
                 <NavLink to="/profile" className=" px-5 py-2 text-[24px] bg-black rounded-xl text-white font-medium">Profile</NavLink>
             </div>
-            <div className="flex flex-row justify-evenly items-center w-[100%] lg:hidden"> 
+            <div className=" flex flex-row justify-evenly items-center w-[100%] lg:hidden"> 
                 <NavLink to="/diary" className={`
                 mr-10 text-[24px]`}>
                     <img className="w-15"src={bookNav}></img>

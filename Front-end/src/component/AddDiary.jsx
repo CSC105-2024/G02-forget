@@ -202,7 +202,7 @@ const AddDiary = () => {
 
     <div className='flex z-40 mt-20 top-10 justify-between items-center hidden lg:flex'>
       
-      <div className='flex fixed justify-between items-center w-100 h-25 mt-5 ml-15 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
+      <div className='flex SecondaryBackground fixed justify-between items-center w-100 h-25 mt-5 ml-15 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
       <MdNavigateBefore onClick={prevMonth} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
         <div className='text-center'>
             <h2 className='text-[56px] font-medium'>
@@ -261,7 +261,7 @@ const AddDiary = () => {
         
         ))} 
       <div className='flex fixed z-20 top-10 justify-between items-center mb-10 lg:hidden '>
-        <div className='flex justify-between ml-80 items-center w-90 h-25 lg:mt-5 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
+        <div className='flex SecondaryBackground justify-between ml-80 items-center w-90 h-25 lg:mt-5 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
         <MdNavigateBefore onClick={prevMonth} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
          <div className='text-center'>
               <h2 className='text-[56px] font-medium'>
@@ -273,7 +273,7 @@ const AddDiary = () => {
         </div>
         <div className='flex addButton ml-80 justify-end lg:hidden'>
           <button onClick={() => {setModal(true);setCreateNewDiary(true)}} className='
-          absolute top-200 fixed flex right-0 SecondaryBackground items-center mr-5 text-[24px] font-medium bg-white 
+          absolute top-190 fixed flex right-0 SecondaryBackground items-center mr-5 text-[24px] font-medium bg-white 
           px-3 py-1 rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)] cursor-pointer'><IoIosAdd />Add</button>
       </div>
     </div>

@@ -12,7 +12,7 @@ const DiaryEntry = ({diary, toggleLock, deleteDiary, handleDiary, topic, day, te
     },[textareaValue])
   return (
     <>
-    <div id="list-diary" className="flex z-1 justify-evenly items-center w-[1000px] h-[400px] bg-[#F6F6F6] mb-15 drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]">
+    <div id="list-diary" className="flex justify-evenly items-center w-[1000px] h-[400px] bg-[#F6F6F6] mb-15">
         <div>
             <h2 id="day" className='text-[56px] font-medium'>Day {day}</h2>
         </div>
@@ -27,7 +27,7 @@ const DiaryEntry = ({diary, toggleLock, deleteDiary, handleDiary, topic, day, te
                     </button>
                 </div>
                 <div id="icon2">
-                    <button type="button" onClick={() => !lock&&deleteDiary(diary.id)}><img id="bin" src={BinIcon} alt="" className='w-[40px] p-[5px] bg-black rounded-[100%] cursor-pointer drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'/></button>
+                    <button type="button" onClick={() => !lock&&deleteDiary(diary.id)}><img id="bin" src={BinIcon} alt="" className='w-[40px] z-1 p-[5px] bg-black rounded-[100%] cursor-pointer drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'/></button>
                 </div>
             </div>
         </div>
