@@ -28,7 +28,7 @@
   background:var(--template-secondary-background-color);
 }
 .defaultTemplate{
-  width: 170px;
+  width: 175px;
   height: 80px;
   border-radius: 10px;
   border-width:var(--template-default-border-width);
@@ -36,7 +36,7 @@
   background-color: #D9D9D9;
 }
 .pinkTemplate{
-  width: 170px;
+  width: 175px;
   height: 80px;
   border-radius: 10px;
   border-width: var(--template-pink-border-width);
@@ -44,7 +44,7 @@
   background-color: #FFBBBB;
 }
 .yellowTemplate{
-  width: 170px;
+  width: 175px;
   height: 80px;
   border-radius: 10px;
   border-width: var(--template-yellow-border-width);
@@ -52,7 +52,7 @@
   background-color:#FFDD78;
 }
 .orangeTemplate{
-  width: 170px;
+  width: 175px;
   height: 80px;
   border-radius: 10px;
   border-width: var(--template-orange-border-width);
@@ -89,22 +89,34 @@
 }
 #list-diary {
   display: flex;
+  width: 1000px;
   justify-content: space-evenly;
   align-items: center;
-  width: 1000px;
   height: 400px;
   background-color:var(--template-secondary-background-color);
   box-shadow: 0 5px 7px rgba(0,0,0,0.25);
+  @media only screen and (max-width: 640px) {
+    flex-direction: column;
+    width: 400px;
+    height: 440px;
+    border-radius: 0;
+  }
 }
 
 #day {
   font-size: 56px;
   font-weight: 500;
+  @media only screen and (max-width: 640px) {
+  font-size: 40px;
+  }
 }
 
 #topic {
   font-size: 48px;
   font-weight: 500;
+  @media only screen and (max-width: 640px) {
+  font-size: 36px;
+  }
 }
 
 #text {
@@ -116,6 +128,11 @@
   resize: none;
   border-radius: 8px;
   box-shadow: 0 5px 7px rgba(0,0,0,0.25);
+  @media only screen and (max-width: 640px) {
+    flex-direction: column;
+    width: 360px;
+    border-radius: 0;
+  }
 }
 
 #container-mood {
@@ -156,4 +173,10 @@
   box-shadow: 0 5px 7px rgba(0,0,0,0.25);
   padding: 5px;
   cursor: pointer;
+}
+
+#message-no-diary {
+  @media only screen and (max-width: 640px) {
+  margin-top: 360px;
+  }
 }

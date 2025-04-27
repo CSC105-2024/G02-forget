@@ -38,6 +38,15 @@ const AddDiary = () => {
     const [emoji, setEmoji] = useState();
     const [createNewDiary, setCreateNewDiary] = useState(true);
     const [currentId, setCurrentId] = useState()
+    const [currentMonth, setCurrentMonth] = useState(new Date());
+    
+    function prevMonth() {
+      setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() - 1));
+    }
+
+    function nextMonth() {
+      setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() + 1));
+    }
 
     const toggleLock = (id) => {
       setDiaries(prev =>
@@ -189,52 +198,85 @@ const AddDiary = () => {
 
   return (
     <>
-    <div className='flex justify-between items-center mb-10'>
-      <div className='flex SecondaryBackground items-center gap-10 mt-5 ml-15 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
-      <MdNavigateBefore className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
+    <div className ='flex flex-col lg:h-50'>
+
+    <div className='flex z-40 mt-20 top-10 justify-between items-center hidden lg:flex'>
+      
+      <div className='flex SecondaryBackground fixed justify-between items-center w-100 h-25 mt-5 ml-15 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
+      <MdNavigateBefore onClick={prevMonth} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
         <div className='text-center'>
-            <h2 className='text-[56px] font-medium'>Month</h2>
-            <p className='text-[24px] -mt-6'>2025</p>
+            <h2 className='text-[56px] font-medium'>
+            {currentMonth.toLocaleString('default', { month: 'long'})}</h2>
+            <p className='text-[24px] -mt-6'>
+            {currentMonth.toLocaleString('default', {year: 'numeric' })}</p>
         </div>
-      <MdNavigateNext className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
+      <MdNavigateNext onClick={nextMonth} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
       </div>
-      <div className=''>
-          <button onClick={() => {setModal(true);setCreateNewDiary(true)}} className='flex SecondaryBackground items-center mt-5 mr-15 text-[24px] font-medium bg-white px-3 py-1 rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)] cursor-pointer'><IoIosAdd />Add</button>
+
+      <div className='flex addButton justify-end w-screen '>
+          <button onClick={() => {setModal(true);setCreateNewDiary(true)}} className='
+          fixed flex SecondaryBackground items-center mt-5 mr-15 text-[24px] font-medium bg-white 
+          px-3 py-1 rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)] cursor-pointer'><IoIosAdd />Add</button>
       </div>
+
     </div>
-    <div className='float-right relative left-[80%] top-100'>
+
+    </div>
+
+    <div className='float-right absolute md:left-260 md:top-175 max-sm:left-90 max-sm:top-175'>
         {showModal && <Modal></Modal>}
-        {showModal && <button className='fixed z-40 bg-white rounded-xl text-[24px] cursor-pointer' onClick={nextModal}><MdNavigateNext /></button>}
-        {showModal && <button className='fixed z-40 right-50 top-15 text-white text-[48px] cursor-pointer' onClick={exit}><RxCross2 /></button>}
+        {showModal && <button className='fixed z-40 bg-white rounded-xl text-[24px] left-cursor-pointer' onClick={nextModal}><MdNavigateNext /></button>}
+        {showModal && <button className='fixed z-40 right-50 top-35 text-white text-[48px] cursor-pointer max-sm:right-5 ' onClick={exit}><RxCross2 /></button>}
     </div>
     <div className=''>
        {showMood && <Mood></Mood>}
-       <div className='float-right relative right-110 top-100'>
+       <div className='float-right absolute md:right-80 md:top-175 max-sm:right-25 max-sm:top-190'>
         {showMood && <button className='fixed z-40 bg-white rounded-xl text-[24px]' onClick={prevtModal}><MdNavigateBefore /></button>}
        </div>
-       <div className='float-right relative right-95 top-100'>
+       <div className='float-right absolute md:right-70 md:top-175 max-sm:right-15 max-sm:top-190'>
         {showMood && <button className='fixed z-40 bg-white rounded-xl text-[24px]' onClick={createNewDiary ? createDiary : editDiary}><IoMdCheckmark /></button>}
-        {showMood && <button className='fixed z-40 right-50 top-15 text-white text-[48px] cursor-pointer' onClick={exit}><RxCross2 /></button>}
+        {showMood && <button className='fixed z-40 right-50 top-35 text-white text-[48px] cursor-pointer max-sm:right-5' onClick={exit}><RxCross2 /></button>}
        </div>
     </div>
-    <div id='container' className='flex Background flex-col items-center bg-[#ECECEC]'>
-      {showMessage && <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f]'>No Diary In This Month</h1>}
-      {showMessage && <img src={Emptybox}></img>}
-      {showDiary && diaries.map(diary => (
-        <DiaryEntry
-        key={diary.id}
-        diary={diary}
-        toggleLock={toggleLock}
-        deleteDiary={deleteDiary}
-        editDiary={editDiary}
-        handleDiary={handleDiary}
-        day={diary.day}
-        topic={diary.topic}
-        textareaValue={diary.text}
-        emoji={diary.emoji}
-        lock={diary.lock}
-        ></DiaryEntry>
-      ))}
+    <div id='container' className='flex Background max-sm:mt-45 items-center bg-[#ECECEC] flex-col'>
+      <div className='flex items-center flex-col'>
+        {showMessage && <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f] max-sm:text-[36px] '>No Diary In This Month</h1>}
+        {showMessage && <img src={Emptybox} className='max-sm:w-30 '></img>}
+      </div>
+        {showDiary && diaries.map(diary => (
+          
+          <DiaryEntry 
+          key={diary.id}
+          diary={diary}
+          toggleLock={toggleLock}
+          deleteDiary={deleteDiary}
+          editDiary={editDiary}
+          handleDiary={handleDiary}
+          day={diary.day}
+          topic={diary.topic}
+          textareaValue={diary.text}
+          emoji={diary.emoji}
+          lock={diary.lock}
+          ></DiaryEntry>
+        
+        ))} 
+      <div className='flex fixed z-20 top-10 justify-between items-center mb-10 lg:hidden '>
+        <div className='flex SecondaryBackground justify-between ml-80 items-center w-90 h-25 lg:mt-5 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
+        <MdNavigateBefore onClick={prevMonth} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
+         <div className='text-center'>
+              <h2 className='text-[56px] font-medium'>
+              {currentMonth.toLocaleString('default', { month: 'long'})}</h2>
+              <p className='text-[24px] -mt-6'>
+              {currentMonth.toLocaleString('default', {year: 'numeric' })}</p>
+          </div>
+        <MdNavigateNext onClick={nextMonth} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
+        </div>
+        <div className='flex addButton ml-80 justify-end lg:hidden'>
+          <button onClick={() => {setModal(true);setCreateNewDiary(true)}} className='
+          absolute top-190 fixed flex right-0 SecondaryBackground items-center mr-5 text-[24px] font-medium bg-white 
+          px-3 py-1 rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)] cursor-pointer'><IoIosAdd />Add</button>
+      </div>
+    </div>
     </div>
     <button onClick={() => console.log(diaries)
     }></button>
