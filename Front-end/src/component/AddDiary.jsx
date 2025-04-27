@@ -223,17 +223,17 @@ const AddDiary = () => {
 
     </div>
 
-    <div className='float-right relative left-270 top-110 max-sm:left-90 max-sm:top-90'>
+    <div className='float-right absolute md:left-260 md:top-175 max-sm:left-90 max-sm:top-175'>
         {showModal && <Modal></Modal>}
         {showModal && <button className='fixed z-40 bg-white rounded-xl text-[24px] left-cursor-pointer' onClick={nextModal}><MdNavigateNext /></button>}
         {showModal && <button className='fixed z-40 right-50 top-35 text-white text-[48px] cursor-pointer max-sm:right-5 ' onClick={exit}><RxCross2 /></button>}
     </div>
     <div className=''>
        {showMood && <Mood></Mood>}
-       <div className='float-right relative right-80 top-100 max-sm:right-25 max-sm:top-105'>
+       <div className='float-right absolute md:right-80 md:top-175 max-sm:right-25 max-sm:top-190'>
         {showMood && <button className='fixed z-40 bg-white rounded-xl text-[24px]' onClick={prevtModal}><MdNavigateBefore /></button>}
        </div>
-       <div className='float-right relative right-70 top-100 max-sm:right-15 max-sm:top-105'>
+       <div className='float-right absolute md:right-70 md:top-175 max-sm:right-15 max-sm:top-190'>
         {showMood && <button className='fixed z-40 bg-white rounded-xl text-[24px]' onClick={createNewDiary ? createDiary : editDiary}><IoMdCheckmark /></button>}
         {showMood && <button className='fixed z-40 right-50 top-35 text-white text-[48px] cursor-pointer max-sm:right-5' onClick={exit}><RxCross2 /></button>}
        </div>
