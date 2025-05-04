@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import BackgroundSignIn from '../img/Background-SignIn.png';
 import { FiEye } from "react-icons/fi";
@@ -8,6 +8,7 @@ import { z } from "zod";
 
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -27,6 +28,7 @@ const SignInPage = () => {
     const result = userSchema.safeParse(formData);
     if (result.success) {
       console.log("Validation successful:", result.data);
+      navigate("/diary");
     } else {
       console.log("Validation errors:", result.error.errors);
       const errorMap = {};
