@@ -4,9 +4,38 @@ import { FaArrowLeft } from "react-icons/fa";
 import BackgroundSignIn from '../img/Background-SignIn.png';
 import { FiEye } from "react-icons/fi";
 import { GoEyeClosed } from "react-icons/go";
+import { z } from "zod";
 
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "" 
+  });
+  const [errors, setErrors] = useState({});
+
+  const userSchema = z.object({
+    username: z.string().min(1, "Wrong username"),
+    // email: z.string().email(),
+    password: z.string().min(4, "Wrong passwrod")
+  });
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const result = userSchema.safeParse(formData);
+    if (result.success) {
+      console.log("Validation successful:", result.data);
+    } else {
+      console.log("Validation errors:", result.error.errors);
+      const errorMap = {};
+      result.error.errors.forEach((err) => {
+        errorMap[err.path[0]] = err.message;
+      });
+      setErrors(errorMap);
+    }
+  };
 
   return (
     <>
@@ -37,11 +66,13 @@ const SignInPage = () => {
               sm:max-md:bg-white sm:max-md:w-[90%]
               max-sm:bg-white max-sm:w-[90%]'
             >
-              <form action="">
+              <form onSubmit={handleSubmit}>
                 <label className='text-[16px] font-medium'>Username or Email</label><br />
-                <input type="text" className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] mb-[24px]' placeholder='Enter your Email or Username'/><br />
+                {errors.username && <span className='text-red-600'>{errors.username}</span>}
+                <input type="text" value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value })} className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] mb-[24px]' placeholder='Enter your Email or Username'/><br />
 
                 <label className='text-[16px] font-medium'>Password</label><br />
+                {errors.password && <span className='text-red-600'>{errors.password}</span>}
                 <div className='relative mb-[24px]'>
                   <button
                     type='button'
@@ -52,7 +83,8 @@ const SignInPage = () => {
                   <input
                     type={showPassword ? 'text' : 'password'}
                     className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] pr-[40px]'
-                    placeholder='Enter your password'/>
+                    placeholder='Enter your password'
+                    value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })}/>
                 </div>
                 <button type="submit" className='w-[100%] bg-black text-white rounded-[5px] py-[5px] font-medium mt-[36px] cursor-pointer transition duration-700
                   hover:bg-[#3A3A3A]'>Sign in</button>

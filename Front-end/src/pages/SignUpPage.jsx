@@ -4,10 +4,44 @@ import { FaArrowLeft } from "react-icons/fa";
 import BackgroundSignUp from '../img/Background-SignUp.png';
 import { FiEye } from "react-icons/fi";
 import { GoEyeClosed } from "react-icons/go";
+import { z } from "zod";
+import ValidAccount from '../component/ValidAccount';
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showValid, setShowValid] = useState(false);
+
+  const [formData, setFormData] = useState({
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    });
+  const [errors, setErrors] = useState({});
+  
+  const userSchema = z.object({
+    username: z.string().min(1, "Username is required"),
+    email: z.string().email("Email is required"),
+    password: z.string().min(4, "Password should be 4 or more letters"),
+    confirmPassword: z.string().min(4, "Not the same password"),
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const result = userSchema.safeParse(formData);
+    if (result.success) {
+      console.log("Validation successful:", result.data);
+      setShowValid(true);
+    } else {
+      console.log("Validation errors:", result.error.errors);
+      const errorMap = {};
+      result.error.errors.forEach((err) => {
+        errorMap[err.path[0]] = err.message;
+      });
+      setErrors(errorMap);
+    }
+  };
 
   return (
     <>
@@ -25,19 +59,24 @@ const SignUpPage = () => {
             <div className='border-1 border-[#D9D9D9] rounded-[5px] p-[24px] w-[420px] h-[500px]
               sm:max-md:bg-white sm:max-md:w-[90%]
               max-sm:bg-white max-sm:w-[90%]'>
-              <form action="">
+              <form onSubmit={handleSubmit}>
                 <label className='text-[16px] font-medium'>Username</label><br />
-                <input type="text" className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] mb-[24px]' placeholder='Enter your username' /><br />
+                {errors.username && <span className='text-red-600'>{errors.username}</span>}
+                <input type="text" value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value })} className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] mb-[24px]' placeholder='Enter your username' /><br />
 
                 <label className='text-[16px] font-medium'>Email</label><br />
-                <input type="text" className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] mb-[24px]' placeholder='Enter your email' /><br />
+                {errors.email && <span className='text-red-600'>{errors.email}</span>}
+                <input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] mb-[24px]' placeholder='Enter your email' /><br />
 
                 <label className='text-[16px] font-medium'>Password</label><br />
+                {errors.password && <span className='text-red-600'>{errors.password}</span>}
                 <div className='relative mb-[24px]'>
                   <input
                     type={showPassword ? 'text' : 'password'}
                     className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] pr-[40px]'
                     placeholder='Enter your password'
+                    value={formData.password}
+                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   />
                   <button
                     type='button'
@@ -50,11 +89,14 @@ const SignUpPage = () => {
                 </div>
 
                 <label className='text-[16px] font-medium'>Confirm password</label><br />
+                {errors.confirmPassword && <span className='text-red-600'>{errors.confirmPassword}</span>}
                 <div className='relative'>
                   <input
                     type={showConfirmPassword ? 'text' : 'password'}
                     className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] pr-[40px]'
                     placeholder='Confirm your password'
+                    value={formData.confirmPassword}
+                    onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                   />
                   <button
                     type='button'
@@ -83,6 +125,7 @@ const SignUpPage = () => {
           sm:max-md:hidden
           max-sm:hidden' />
       </div>
+      {showValid && <ValidAccount></ValidAccount>}
     </>
   )
 }
