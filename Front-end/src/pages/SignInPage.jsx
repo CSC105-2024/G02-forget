@@ -1,13 +1,50 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import BackgroundSignIn from '../img/Background-SignIn.png';
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
 import { GoEyeClosed } from "react-icons/go";
+import { z } from "zod";
+import * as api from '../api/user';
 
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    password: "" 
+  });
+  const [errors, setErrors] = useState({});
+
+  const userSchema = z.object({
+    name: z.string().min(1, "Username or email is wrong"),
+    // email: z.string().email(),
+    password: z.string().min(4, "Wrong passwrod")
+  });
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const result = userSchema.safeParse(formData);
+    if (result.success) {
+      console.log("Validation successful:", result.data);
+      signinUser(formData.name, formData.password);
+      navigate("/diary");
+    } else {
+      console.log("Validation errors:", result.error.errors);
+      const errorMap = {};
+      result.error.errors.forEach((err) => {
+        errorMap[err.path[0]] = err.message;
+      });
+      setErrors(errorMap);
+    }
+  };
+
+  const signinUser = async (name, password) => {
+    await api.signinUser(name, password);
+  }
 
   return (
     <>
@@ -58,21 +95,25 @@ const SignInPage = () => {
               sm:max-md:bg-white sm:max-md:w-[90%]
               max-sm:bg-white max-sm:w-[90%]'
             >
-              <form action="">
+              <form onSubmit={handleSubmit}>
                 <label className='text-[16px] font-medium'>Username or Email</label><br />
-                <input type="text" className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] mb-[24px]' /><br />
+                {errors.name && <span className='text-red-600'>{errors.name}</span>}
+                <input type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] mb-[24px]' placeholder='Enter your Email or Username'/><br />
 
                 <label className='text-[16px] font-medium'>Password</label><br />
+                {errors.password && <span className='text-red-600'>{errors.password}</span>}
                 <div className='relative mb-[24px]'>
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] pr-[40px]'/>
                   <button
                     type='button'
                     onClick={() => setShowPassword(!showPassword)}
                     className='absolute top-1/2 right-[10px] transform -translate-y-1/2 text-sm text-gray-600'>
                     {showPassword ? <FiEye className='text-[25px]'/> : <GoEyeClosed className='text-[25px]'/>}
                   </button>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] pr-[40px]'
+                    placeholder='Enter your password'
+                    value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })}/>
                 </div>
                 <button type="submit" className='w-[100%] bg-black text-white rounded-[5px] py-[5px] font-medium mt-[36px] cursor-pointer transition duration-700
                   hover:bg-[#3A3A3A]'>Sign in</button>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { IoIosAdd } from "react-icons/io";
 import Modal from './Modal';
 import DiaryEntry from './DiaryEntry';
@@ -12,11 +12,15 @@ import Mood from './Mood';
 import { topic, setTopicForAddDiary, textareaValue, setTextareaValueForAddDiary } from './Modal';
 import { selectMood, setSelectMood } from './Mood';
 // Emoji image
-import RedEmoji from '../img/RedEmoji.png'
-import OrangeEmoji from '../img/OrangeEmoji.png'
-import YellowEmoji from '../img/YellowEmoji.png'
-import LightGreenEmoji from '../img/LightGreenEmoji.png'
-import GreenEmoji from '../img/GreenEmoji.png'
+import RedEmoji from '../img/RedEmoji.png';
+import OrangeEmoji from '../img/OrangeEmoji.png';
+import YellowEmoji from '../img/YellowEmoji.png';
+import LightGreenEmoji from '../img/LightGreenEmoji.png';
+import GreenEmoji from '../img/GreenEmoji.png';
+import Emptybox from '../img/EmptyBox.png';
+
+import * as apiDiary from '../api/diary';
+import * as apiUser from '../api/user';
 
 export let saveTopic = "";
 export const setSaveTopic = (topic) => {
@@ -31,13 +35,53 @@ export const setSaveTextareaValue = (textareaValue) => {
 const AddDiary = () => {
     const [diaries, setDiaries] = useState([]);
     const [showMessage, setShowMessage] = useState(true);
-    const [showDiary, setShowDiary] = useState(false);
+    const [showDiary, setShowDiary] = useState(true);
     const [showModal, setModal] = useState(false);
     const [showMood, setMood] = useState(false);
     const [emoji, setEmoji] = useState();
     const [createNewDiary, setCreateNewDiary] = useState(true);
     const [currentId, setCurrentId] = useState()
     const [currentMonth, setCurrentMonth] = useState(new Date());
+
+    // Backend
+    const addDiary = async (day, month, topic, content, emoji, userId) => {
+      await apiDiary.createDairy(day, month, topic, content, emoji, userId);
+    }
+
+    // getDiaryFromUser
+	const fetchDiaryData = async (month, userId) => {
+		const data = await apiUser.getDiaryFromUser(month, userId);
+		if (data.success) {
+			setDiaries(data.data.data);
+      console.log(data.data.data);
+      
+		}
+    
+	};
+
+  // lockDiary
+  const lockDiary = async (id) => {
+    await apiDiary.lockDiary(id);
+  }
+
+  // deleteDiary
+  const removeDiary = async (id) => {
+    await apiDiary.deleteDiary(id);
+  }
+
+  // editDiary
+  const editDiaryData = async (id, topic, content, emoji) => {
+    await apiDiary.editDiary(id, topic, content, emoji);
+  }
+
+	useEffect(() => {
+		fetchDiaryData(currentMonth.toLocaleString('default', { month: 'long'}), 1);
+    if (diaries.length > 0) {
+      setShowDiary(true);
+    } else {
+      setShowDiary(false);
+    }
+	}, [currentMonth]);
     
     function prevMonth() {
       setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() - 1));
@@ -61,10 +105,12 @@ const AddDiary = () => {
           diary.id === id ? { ...diary, lock: !diary.lock } : diary
         )
       );
+      lockDiary(id);
     };
 
     const deleteDiary = (id) => {
       setDiaries((prev) => prev.filter((diary) => diary.id !== id || diary.lock));
+      removeDiary(id);
       if (diaries.length === 1 || diaries.length === 0) {
         setShowMessage(true);
         setShowDiary(false);
@@ -85,7 +131,6 @@ const AddDiary = () => {
     }
 
     const editDiary = () => {
-      console.log(`before edit: ${textareaValue}`);
       
       let collectEmoji = "";
 
@@ -113,7 +158,7 @@ const AddDiary = () => {
           diary.id === currentId ? { ...diary, topic: topic, text: textareaValue, emoji: collectEmoji} : diary
         )
       );
-      console.log(`after edit: ${textareaValue}`);
+      editDiaryData(currentId, topic, textareaValue, collectEmoji);
       setSaveTopic("");
       setSaveTextareaValue("");
       setSelectMood("");
@@ -189,6 +234,7 @@ const AddDiary = () => {
             lock: false,
           }
           setDiaries(prev => [...prev, newDiary]);
+          addDiary(newDiary.day, currentMonth.toLocaleString('default', { month: 'long'}), newDiary.topic, newDiary.text, newDiary.emoji, 1);
         }
 
         setShowDiary(true);
@@ -197,8 +243,10 @@ const AddDiary = () => {
         setSaveTopic("");
         setSaveTextareaValue("");
         setSelectMood("");
-        
+        fetchDiaryData(currentMonth.toLocaleString('default', { month: 'long'}), 1);
+        window.location.reload();
       }
+      
       
     }
 
@@ -209,14 +257,14 @@ const AddDiary = () => {
     <div className='flex z-40 mt-20 top-10 justify-between items-center hidden lg:flex'>
       
       <div className='flex SecondaryBackground fixed justify-between items-center w-100 h-25 mt-5 ml-15 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
-      <MdNavigateBefore onClick={prevMonth} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
+      <MdNavigateBefore onClick={() => prevMonth()} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
         <div className='text-center'>
             <h2 className='text-[56px] font-medium'>
             {currentMonth.toLocaleString('default', { month: 'long'})}</h2>
             <p className='text-[24px] -mt-6'>
             {currentMonth.toLocaleString('default', {year: 'numeric' })}</p>
         </div>
-      <MdNavigateNext onClick={nextMonth} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
+      <MdNavigateNext onClick={() => nextMonth()} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
       </div>
 
       <div className='flex addButton justify-end w-screen '>
@@ -246,10 +294,10 @@ const AddDiary = () => {
     </div>
     <div id='container' className='flex Background max-sm:mt-45 items-center bg-[#ECECEC] flex-col'>
       <div className='flex items-center flex-col'>
-        {showMessage && <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f] max-sm:text-[36px] '>No Diary In This Month</h1>}
-        {showMessage && <img src={Emptybox} className='max-sm:w-30 '></img>}
+        {diaries.length <= 0 && <h1 id='message-no-diary' className='text-[64px] text-center text-[#5f5f5f] max-sm:text-[36px] '>No Diary In This Month</h1>}
+        {diaries.length <= 0 && <img src={Emptybox} className='max-sm:w-30 '></img>}
       </div>
-        {showDiary && diaries.map(diary => (
+        {diaries.length > 0 && diaries.map(diary => (
           
           <DiaryEntry 
           key={diary.id}
@@ -268,14 +316,14 @@ const AddDiary = () => {
         ))} 
       <div className='flex fixed z-20 top-10 justify-between items-center mb-10 lg:hidden '>
         <div className='flex SecondaryBackground justify-between ml-80 items-center w-90 h-25 lg:mt-5 px-4 bg-[#F6F6F6] rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)]'>
-        <MdNavigateBefore onClick={prevMonth} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
+        <MdNavigateBefore onClick={() => prevMonth()} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
          <div className='text-center'>
               <h2 className='text-[56px] font-medium'>
               {currentMonth.toLocaleString('default', { month: 'long'})}</h2>
               <p className='text-[24px] -mt-6'>
               {currentMonth.toLocaleString('default', {year: 'numeric' })}</p>
           </div>
-        <MdNavigateNext onClick={nextMonth} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
+        <MdNavigateNext onClick={() => nextMonth()} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
         </div>
         <div className='flex addButton ml-80 justify-end lg:hidden'>
           <button onClick={() => {setModal(true);setCreateNewDiary(true)}} className='

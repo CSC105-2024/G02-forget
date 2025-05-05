@@ -1,8 +1,21 @@
 import React from 'react'
 import BookImage from '../img/book.png'
 import { Link } from "react-router-dom";
+import { Axios } from '../axiosInstance';
+import { useEffect } from 'react';
 
 const HomePage = () => {
+  const testConnection = async () => {
+		try {
+			const data = await Axios.get('/');
+			console.log(data.data);
+		} catch (e) {
+			console.log(`Error fetching backend server: ${e}`);
+		}
+	};
+  useEffect(() => {
+    testConnection();
+  }, []);
   return (
     <>
         <div className='flex items-center bg-[#ECECEC] h-screen'>

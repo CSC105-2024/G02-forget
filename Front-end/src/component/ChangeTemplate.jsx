@@ -1,6 +1,10 @@
 import React from "react";
+import * as apiUser from '../api/user';
 
 const ChangeTemplate = () => {
+  const changeTemplate = async (id, template) => {
+    await apiUser.changeTemplate(id, template)
+  }
   const changeColor = (bgColor,secondaryBg,navColor,selected) => {
     document.documentElement.style.setProperty("--template-background-color", bgColor);
     document.documentElement.style.setProperty("--template-navbar-color", navColor);
