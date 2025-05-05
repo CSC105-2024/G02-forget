@@ -5,6 +5,6 @@ import { diaryRouter } from "./diary.route.ts";
 const mainRouter = new Hono();
 
 mainRouter.route("/users", userRouter);
-mainRouter.route("/todos", diaryRouter);
+mainRouter.route("/diaries", diaryRouter);
 
 export { mainRouter };

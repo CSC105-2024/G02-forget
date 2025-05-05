@@ -131,6 +131,15 @@ exports.Prisma.DiaryScalarFieldEnum = {
   topic: 'topic',
   content: 'content',
   emoji: 'emoji',
+  lock: 'lock',
+  userId: 'userId'
+};
+
+exports.Prisma.TemplateScalarFieldEnum = {
+  id: 'id',
+  bgColor: 'bgColor',
+  bg2Color: 'bg2Color',
+  navColor: 'navColor',
   userId: 'userId'
 };
 
@@ -142,7 +151,8 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Diary: 'Diary'
+  Diary: 'Diary',
+  Template: 'Template'
 };
 
 /**

@@ -6,6 +6,7 @@ import { FiEye } from "react-icons/fi";
 import { GoEyeClosed } from "react-icons/go";
 import { z } from "zod";
 import ValidAccount from '../component/ValidAccount';
+import * as api from '../api/user';
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,24 +25,36 @@ const SignUpPage = () => {
     username: z.string().min(1, "Username is required"),
     email: z.string().email("Email is required"),
     password: z.string().min(4, "Password should be 4 or more letters"),
-    confirmPassword: z.string().min(4, "Not the same password"),
+    confirmPassword: z.string().min(4, "Password does not match"),
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const errorMap = {};
     const result = userSchema.safeParse(formData);
-    if (result.success) {
-      console.log("Validation successful:", result.data);
-      setShowValid(true);
+    if (formData.password !== formData.confirmPassword) {
+      setErrors((prev) => ({
+        ...prev,
+        confirmPassword: "Password does not match"
+      }))
     } else {
-      console.log("Validation errors:", result.error.errors);
-      const errorMap = {};
-      result.error.errors.forEach((err) => {
-        errorMap[err.path[0]] = err.message;
-      });
-      setErrors(errorMap);
+      if (result.success) {
+        console.log("Validation successful:", result.data);
+        createUser(formData.username, formData.email, formData.password)
+        setShowValid(true);
+      } else {
+        console.log("Validation errors:", result.error.errors);
+        result.error.errors.forEach((err) => {
+          errorMap[err.path[0]] = err.message;
+        });
+        setErrors(errorMap);
+      }
     }
   };
+
+  const createUser = async (username, email, password) => {
+    await api.createUser(username, email, password);
+  }
 
   return (
     <>

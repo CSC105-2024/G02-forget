@@ -5,19 +5,20 @@ import BackgroundSignIn from '../img/Background-SignIn.png';
 import { FiEye } from "react-icons/fi";
 import { GoEyeClosed } from "react-icons/go";
 import { z } from "zod";
+import * as api from '../api/user';
 
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    username: "",
+    name: "",
     password: "" 
   });
   const [errors, setErrors] = useState({});
 
   const userSchema = z.object({
-    username: z.string().min(1, "Wrong username"),
+    name: z.string().min(1, "Username or email is wrong"),
     // email: z.string().email(),
     password: z.string().min(4, "Wrong passwrod")
   });
@@ -28,6 +29,7 @@ const SignInPage = () => {
     const result = userSchema.safeParse(formData);
     if (result.success) {
       console.log("Validation successful:", result.data);
+      signinUser(formData.name, formData.password);
       navigate("/diary");
     } else {
       console.log("Validation errors:", result.error.errors);
@@ -38,6 +40,10 @@ const SignInPage = () => {
       setErrors(errorMap);
     }
   };
+
+  const signinUser = async (name, password) => {
+    await api.signinUser(name, password);
+  }
 
   return (
     <>
@@ -70,8 +76,8 @@ const SignInPage = () => {
             >
               <form onSubmit={handleSubmit}>
                 <label className='text-[16px] font-medium'>Username or Email</label><br />
-                {errors.username && <span className='text-red-600'>{errors.username}</span>}
-                <input type="text" value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value })} className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] mb-[24px]' placeholder='Enter your Email or Username'/><br />
+                {errors.name && <span className='text-red-600'>{errors.name}</span>}
+                <input type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] mb-[24px]' placeholder='Enter your Email or Username'/><br />
 
                 <label className='text-[16px] font-medium'>Password</label><br />
                 {errors.password && <span className='text-red-600'>{errors.password}</span>}
