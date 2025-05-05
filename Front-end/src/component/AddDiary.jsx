@@ -91,6 +91,14 @@ const AddDiary = () => {
       setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() + 1));
     }
 
+    function prevMonth() {
+      setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() - 1));
+    }
+
+    function nextMonth() {
+      setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() + 1));
+    }
+    
     const toggleLock = (id) => {
       setDiaries(prev =>
         prev.map(diary =>
@@ -324,8 +332,6 @@ const AddDiary = () => {
       </div>
     </div>
     </div>
-    <button onClick={() => console.log(diaries)
-    }></button>
     </>
   )
 }

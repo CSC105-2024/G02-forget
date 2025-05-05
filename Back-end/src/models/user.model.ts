@@ -47,13 +47,15 @@ const getDiaryFromUser = async (month: string, userId: number) => {
 }
 
 const changeTemplate = async (id: number, template: string) => {
-    const user = await db.user.update({
+    const user = await db.template.update({
         where: {
             id: id
         },
-        data: {
-            template: template
-        }
+        data: {    
+            bgColor   :"#000000",
+            bg2Color  :"#000000",
+            navColor  :"#000000",
+        },
     })
     return user;
 }
