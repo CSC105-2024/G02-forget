@@ -1,3 +1,4 @@
+import { data } from "react-router-dom";
 import { Axios } from "../axiosInstance";
 
 const createUser = async (username: string, email: string, password: string ) => {
@@ -12,9 +13,29 @@ const createUser = async (username: string, email: string, password: string ) =>
     }
 }
 
+const getInfoUser = async (id: number) => {
+    try {
+        const response = await Axios.get(`/users/${id}`);
+        return {
+            success: true,
+            data: response.data
+        }
+    } catch (e) {
+        console.log(e);
+        return {
+            success: false,
+            data: null
+        }
+    }
+}
+
 const signinUser = async (name: string, password: string) => {
     try {
-        await Axios.post("/users/signin", {name: name, password: password});
+        const response = await Axios.post("/users/signin", {name: name, password: password});
+        return {
+            success: true,
+            data: response.data
+        }
     } catch (e) {
         console.log(e);
         return {
@@ -42,7 +63,12 @@ const getDiaryFromUser = async (month: string, userId: number) => {
 
 const changeTemplate = async (id: number, template: string) => {
     try {
-        await Axios.patch(`/users/template/${id}`, {template: template});
+        const response = await Axios.patch(`/users/template/${id}`, {template: template});
+        return {
+            success: true,
+            data: response.data
+        }
+
     } catch (e) {
         console.log(e);
         return {
@@ -52,4 +78,21 @@ const changeTemplate = async (id: number, template: string) => {
     }
 }
 
-export { createUser, signinUser, getDiaryFromUser, changeTemplate};
+const getTemplate = async (id: number) => {
+    try {
+        const response = await Axios.get(`/users/template/${id}`);
+        return {
+            success: true,
+            data: response.data
+        }
+
+    } catch (e) {
+        console.log(e);
+        return {
+            success: false,
+            data: null
+        }
+    }
+}
+
+export { createUser, signinUser, getDiaryFromUser, changeTemplate, getTemplate, getInfoUser};

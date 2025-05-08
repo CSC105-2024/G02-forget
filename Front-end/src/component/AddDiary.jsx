@@ -11,6 +11,7 @@ import Mood from './Mood';
 // Import Value
 import { topic, setTopicForAddDiary, textareaValue, setTextareaValueForAddDiary } from './Modal';
 import { selectMood, setSelectMood } from './Mood';
+import InvalidAdd from './InvalidAdd';
 // Emoji image
 import RedEmoji from '../img/RedEmoji.png';
 import OrangeEmoji from '../img/OrangeEmoji.png';
@@ -40,8 +41,11 @@ const AddDiary = () => {
     const [showMood, setMood] = useState(false);
     const [emoji, setEmoji] = useState();
     const [createNewDiary, setCreateNewDiary] = useState(true);
-    const [currentId, setCurrentId] = useState()
+    const [currentId, setCurrentId] = useState();
     const [currentMonth, setCurrentMonth] = useState(new Date());
+    const [thisMonth, setThisMonth] = useState(0);
+    const [showInvalidAdd, setShowInvalidAdd] = useState(false);
+    
 
     // Backend
     const addDiary = async (day, month, topic, content, emoji, userId) => {
@@ -54,6 +58,7 @@ const AddDiary = () => {
 		if (data.success) {
 			setDiaries(data.data.data);
       console.log(data.data.data);
+      
       
 		}
     
@@ -85,10 +90,12 @@ const AddDiary = () => {
     
     function prevMonth() {
       setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() - 1));
+      setThisMonth(thisMonth - 1);
     }
 
     function nextMonth() {
       setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() + 1));
+      setThisMonth(thisMonth + 1);
     }
 
     const toggleLock = (id) => {
@@ -112,7 +119,7 @@ const AddDiary = () => {
     const handleDiary = (diary) => {
       setCurrentId(diary.id);
       setSaveTopic(diary.topic);
-      setSaveTextareaValue(diary.text);
+      setSaveTextareaValue(diary.content);
       setSelectMood(diary.emoji)
       console.log(`handle: ${diary.text}`);
       console.log(`handle: ${diary.emoji}`);
@@ -156,7 +163,22 @@ const AddDiary = () => {
       setSelectMood("");
       setMood(false);
       setModal(false);
+
+      window.location.reload();
     };
+
+    const okay = () => {
+      setShowInvalidAdd(false)
+    }
+
+    function add() {
+      if (thisMonth === 0) {
+        setModal(true);
+        setCreateNewDiary(true)
+      } else {
+        setShowInvalidAdd(true);
+      }
+    }
     
     function exit() {
       setMood(false);
@@ -260,7 +282,7 @@ const AddDiary = () => {
       </div>
 
       <div className='flex addButton justify-end w-screen '>
-          <button onClick={() => {setModal(true);setCreateNewDiary(true)}} className='
+          <button onClick={add} className='
           fixed flex SecondaryBackground items-center mt-5 mr-15 text-[24px] font-medium bg-white 
           px-3 py-1 rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)] cursor-pointer'><IoIosAdd />Add</button>
       </div>
@@ -300,7 +322,7 @@ const AddDiary = () => {
           handleDiary={handleDiary}
           day={diary.day}
           topic={diary.topic}
-          textareaValue={diary.text}
+          textareaValue={diary.content}
           emoji={diary.emoji}
           lock={diary.lock}
           ></DiaryEntry>
@@ -318,7 +340,7 @@ const AddDiary = () => {
         <MdNavigateNext onClick={() => nextMonth()} className='text-[24px] text-white bg-black rounded-2xl cursor-pointer'/>
         </div>
         <div className='flex addButton ml-80 justify-end lg:hidden'>
-          <button onClick={() => {setModal(true);setCreateNewDiary(true)}} className='
+          <button onClick={add} className='
           absolute top-190 fixed flex right-0 SecondaryBackground items-center mr-5 text-[24px] font-medium bg-white 
           px-3 py-1 rounded-lg drop-shadow-[0_5px_7px_rgba(0,0,0,0.25)] cursor-pointer'><IoIosAdd />Add</button>
       </div>
@@ -326,6 +348,7 @@ const AddDiary = () => {
     </div>
     <button onClick={() => console.log(diaries)
     }></button>
+    {showInvalidAdd && <InvalidAdd okay={okay}></InvalidAdd>}
     </>
   )
 }

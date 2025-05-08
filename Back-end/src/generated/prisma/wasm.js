@@ -121,7 +121,8 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   username: 'username',
   email: 'email',
-  password: 'password'
+  password: 'password',
+  template: 'template'
 };
 
 exports.Prisma.DiaryScalarFieldEnum = {
@@ -135,14 +136,6 @@ exports.Prisma.DiaryScalarFieldEnum = {
   userId: 'userId'
 };
 
-exports.Prisma.TemplateScalarFieldEnum = {
-  id: 'id',
-  bgColor: 'bgColor',
-  bg2Color: 'bg2Color',
-  navColor: 'navColor',
-  userId: 'userId'
-};
-
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -151,8 +144,7 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Diary: 'Diary',
-  Template: 'Template'
+  Diary: 'Diary'
 };
 
 /**

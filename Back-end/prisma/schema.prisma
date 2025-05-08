@@ -19,7 +19,7 @@ model User {
   username   String
   email      String
   password   String
-  template   Template[]
+  template   String @default("white")
   diary      Diary[]
 }
 
@@ -31,15 +31,6 @@ model Diary {
   content   String
   emoji     String
   lock      Boolean @default(false)
-  userId    Int
-  user      User    @relation(fields: [userId], references: [id])
-}
-
-model Template {
-  id        Int     @id @default(autoincrement())
-  bgColor   String
-  bg2Color  String
-  navColor  String
   userId    Int
   user      User    @relation(fields: [userId], references: [id])
 }

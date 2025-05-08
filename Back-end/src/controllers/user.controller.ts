@@ -63,6 +63,23 @@ const getAllUser = async (c: Context) => {
 	}
 }
 
+const getInfoUser = async (c: Context) => {
+	try {
+		const id = Number(c.req.param("id"));
+		const user = await userModel.getInfoUser(id);
+        return c.json(user);
+	} catch (e) {
+		return c.json(
+			{
+				success: false,
+				data: null,
+				msg: `${e}`,
+			},
+			500
+		);
+	}
+}
+
 const signinUser = async (c: Context) => {
 	try {
 		const { name, password } = await c.req.json();
@@ -118,10 +135,10 @@ const changeTemplate = async (c: Context) => {
 	try {
 		const id = Number(c.req.param("id"));
 		const { template } = await c.req.json();
-		const diary = await userModel.changeTemplate(id, template);
+		const user = await userModel.changeTemplate(id, template);
 		return c.json({
 			success: true,
-			data: diary
+			data: user
 		});
 	} catch (e) {
 		return c.json({
@@ -132,4 +149,24 @@ const changeTemplate = async (c: Context) => {
 	}
 }
 
-export { createUser, getAllUser, signinUser, getDiaryFromUser, changeTemplate };
+const getTemplate = async (c: Context) => {
+	try {
+		const id = Number(c.req.param("id"));
+		const user = await userModel.getTemplate(id);
+		return c.json({
+			success: true,
+			data: {
+				id: user?.id,
+				template: user?.template,
+			}
+		});
+	} catch (e) {
+		return c.json({
+			success: false,
+			data: null,
+			msg: `${e}`,
+		})
+	}
+}
+
+export { createUser, getAllUser, getInfoUser, signinUser, getDiaryFromUser, changeTemplate, getTemplate };

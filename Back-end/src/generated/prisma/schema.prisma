@@ -15,11 +15,11 @@ datasource db {
 }
 
 model User {
-  id       Int        @id @default(autoincrement())
+  id       Int     @id @default(autoincrement())
   username String
   email    String
   password String
-  template Template[]
+  template String  @default("white")
   diary    Diary[]
 }
 
@@ -33,13 +33,4 @@ model Diary {
   lock    Boolean @default(false)
   userId  Int
   user    User    @relation(fields: [userId], references: [id])
-}
-
-model Template {
-  id       Int    @id @default(autoincrement())
-  bgColor  String
-  bg2Color String
-  navColor String
-  userId   Int
-  user     User   @relation(fields: [userId], references: [id])
 }

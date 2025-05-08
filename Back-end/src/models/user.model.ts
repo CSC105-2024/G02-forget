@@ -36,6 +36,15 @@ const getAllUser = async () => {
     return user;
 }
 
+const getInfoUser = async (id: number) => {
+    const user = await db.user.findFirst({
+        where: {
+            id: id
+        }
+    })
+    return user;
+}
+
 const getDiaryFromUser = async (month: string, userId: number) => {
     const diary = await db.diary.findMany({
         where: {
@@ -58,5 +67,14 @@ const changeTemplate = async (id: number, template: string) => {
     return user;
 }
 
+const getTemplate = async (id: number) => {
+    const user = await db.user.findFirst({
+        where: {
+            id: id
+        }
+    })
+    return user;
+}
 
-export { isDuplicate, createUser, getAllUser, signinUser, getDiaryFromUser, changeTemplate }
+
+export { isDuplicate, createUser, getAllUser, getInfoUser, signinUser, getDiaryFromUser, changeTemplate, getTemplate}

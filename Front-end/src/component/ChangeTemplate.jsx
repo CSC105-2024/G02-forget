@@ -1,10 +1,68 @@
 import React from "react";
 import * as apiUser from '../api/user';
+import { useEffect } from "react";
+
+export function editTemplate(bgColor,secondaryBg,navColor,selected) {
+  document.documentElement.style.setProperty("--template-background-color", bgColor);
+  document.documentElement.style.setProperty("--template-navbar-color", navColor);
+  document.documentElement.style.setProperty("--template-secondary-background-color", secondaryBg);
+  switch (selected) {
+    case 2:
+      document.documentElement.style.setProperty("--template-default-border-width","0px");
+      document.documentElement.style.setProperty("--template-pink-border-width","1px");
+      document.documentElement.style.setProperty("--template-yellow-border-width","0px");
+      document.documentElement.style.setProperty("--template-orange-border-width","0px");
+      break;
+    case 3:
+      document.documentElement.style.setProperty("--template-default-border-width","0px");
+      document.documentElement.style.setProperty("--template-pink-border-width","0px");
+      document.documentElement.style.setProperty("--template-yellow-border-width","1px");
+      document.documentElement.style.setProperty("--template-orange-border-width","0px");
+      break;
+    case 4:
+      document.documentElement.style.setProperty("--template-default-border-width","0px");
+      document.documentElement.style.setProperty("--template-pink-border-width","0px");
+      document.documentElement.style.setProperty("--template-yellow-border-width","0px");
+      document.documentElement.style.setProperty("--template-orange-border-width","1px");
+      break;
+    default:
+      document.documentElement.style.setProperty("--template-default-border-width","1px");
+      document.documentElement.style.setProperty("--template-pink-border-width","0px");
+      document.documentElement.style.setProperty("--template-yellow-border-width","0px");
+      document.documentElement.style.setProperty("--template-orange-border-width","0px");
+      break;
+  }
+};
 
 const ChangeTemplate = () => {
+  // API
   const changeTemplate = async (id, template) => {
-    await apiUser.changeTemplate(id, template)
+    const data = await apiUser.changeTemplate(id, template)
+    if (data.success) {
+      console.log(data.data);
+    }
   }
+
+  const fetchTemplate = async (id) => {
+      const data = await apiUser.getTemplate(id);
+      if (data.success) {
+        if (data.data.data.template === "white") {
+          changeColor("#ECECEC","#F6F6F6","#F2F2F2",1);
+        } else if (data.data.data.template === "pink") {
+          changeColor("#FFACAC","#FFD2D2","#FFBBBB",2);
+        } else if (data.data.data.template === "yellow") {
+          changeColor("#FFD558","#FFE59A","#FFDD78",3);
+        } else if (data.data.data.template === "orange") {
+          changeColor("#FFB163","#FFD4A9","#FFBB77",4);
+        }
+        
+      }
+    };
+
+    useEffect(() => {
+      fetchTemplate(1);
+      }, []);
+
   const changeColor = (bgColor,secondaryBg,navColor,selected) => {
     document.documentElement.style.setProperty("--template-background-color", bgColor);
     document.documentElement.style.setProperty("--template-navbar-color", navColor);
@@ -15,24 +73,28 @@ const ChangeTemplate = () => {
         document.documentElement.style.setProperty("--template-pink-border-width","1px");
         document.documentElement.style.setProperty("--template-yellow-border-width","0px");
         document.documentElement.style.setProperty("--template-orange-border-width","0px");
+        changeTemplate(1, "pink");
         break;
       case 3:
         document.documentElement.style.setProperty("--template-default-border-width","0px");
         document.documentElement.style.setProperty("--template-pink-border-width","0px");
         document.documentElement.style.setProperty("--template-yellow-border-width","1px");
         document.documentElement.style.setProperty("--template-orange-border-width","0px");
+        changeTemplate(1, "yellow");
         break;
       case 4:
         document.documentElement.style.setProperty("--template-default-border-width","0px");
         document.documentElement.style.setProperty("--template-pink-border-width","0px");
         document.documentElement.style.setProperty("--template-yellow-border-width","0px");
         document.documentElement.style.setProperty("--template-orange-border-width","1px");
+        changeTemplate(1, "orange");
         break;
       default:
         document.documentElement.style.setProperty("--template-default-border-width","1px");
         document.documentElement.style.setProperty("--template-pink-border-width","0px");
         document.documentElement.style.setProperty("--template-yellow-border-width","0px");
         document.documentElement.style.setProperty("--template-orange-border-width","0px");
+        changeTemplate(1, "white");
         break;
     }
   };

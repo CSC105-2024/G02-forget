@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import BackgroundSignIn from '../img/Background-SignIn.png';
@@ -16,6 +16,7 @@ const SignInPage = () => {
     password: "" 
   });
   const [errors, setErrors] = useState({});
+  const [errorText, setErrorText] = useState();
 
   const userSchema = z.object({
     name: z.string().min(1, "Username or email is wrong"),
@@ -23,6 +24,28 @@ const SignInPage = () => {
     password: z.string().min(4, "Wrong passwrod")
   });
 
+  useEffect(() => {
+    const savedError = localStorage.getItem("error");
+    if (savedError) {
+      setErrorText(savedError);
+      localStorage.removeItem("error");
+    }
+  }, []);
+
+  // Backend => API Sign in
+  const signinUser = async (name, password) => {
+    try {
+      const data = await api.signinUser(name, password);
+    if (data.data.success) {
+      navigate("/diary");
+    } else {
+      localStorage.setItem("error", "Username or email or password is wrong")
+      window.location.reload();
+    }
+    } catch (e) {
+      console.log(e);
+    } 
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,9 +53,9 @@ const SignInPage = () => {
     if (result.success) {
       console.log("Validation successful:", result.data);
       signinUser(formData.name, formData.password);
-      navigate("/diary");
     } else {
       console.log("Validation errors:", result.error.errors);
+      setErrorText("")
       const errorMap = {};
       result.error.errors.forEach((err) => {
         errorMap[err.path[0]] = err.message;
@@ -40,10 +63,6 @@ const SignInPage = () => {
       setErrors(errorMap);
     }
   };
-
-  const signinUser = async (name, password) => {
-    await api.signinUser(name, password);
-  }
 
   return (
     <>
@@ -76,6 +95,7 @@ const SignInPage = () => {
             >
               <form onSubmit={handleSubmit}>
                 <label className='text-[16px] font-medium'>Username or Email</label><br />
+                {errorText && <span className='text-red-600'>{errorText}</span>}
                 {errors.name && <span className='text-red-600'>{errors.name}</span>}
                 <input type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className='border-1 rounded-[5px] border-[#D9D9D9] w-[100%] p-[5px] mb-[24px]' placeholder='Enter your Email or Username'/><br />
 
