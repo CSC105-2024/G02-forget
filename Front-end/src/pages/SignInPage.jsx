@@ -36,12 +36,13 @@ const SignInPage = () => {
   const signinUser = async (name, password) => {
     try {
       const data = await api.signinUser(name, password);
-    if (data.data.success) {
-      navigate("/diary");
-    } else {
-      localStorage.setItem("error", "Username or email or password is wrong")
-      window.location.reload();
-    }
+      if (data.data.success) {
+        localStorage.setItem("userAccount", data.data.data.id);
+        navigate("/diary");
+      } else {
+        localStorage.setItem("error", "Username or email or password is wrong");
+        window.location.reload();
+      }
     } catch (e) {
       console.log(e);
     } 

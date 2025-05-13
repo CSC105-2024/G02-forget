@@ -6,6 +6,8 @@ import * as apiUser from "../api/user"
 import { editTemplate } from '../component/ChangeTemplate'
 
 const DiaryPage = () => {
+    const userAccount = parseInt(localStorage.getItem("userAccount"));
+
     const fetchTemplate = async (id) => {
       const data = await apiUser.getTemplate(id);
       if (data.success) {
@@ -23,7 +25,7 @@ const DiaryPage = () => {
   };
     
   useEffect(() => {
-    fetchTemplate(1);
+    fetchTemplate(userAccount);
   }, []);
   return (
     <>

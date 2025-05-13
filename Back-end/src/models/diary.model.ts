@@ -1,10 +1,11 @@
 import { db } from "../index.ts";
 
-const createDiary = async (day: number, month: string, topic: string, content: string, emoji: string, userId: number) => {
+const createDiary = async (day: number, month: string, year: string, topic: string, content: string, emoji: string, userId: number) => {
     const diary = await db.diary.create({
         data: {
             day: day,
             month: month,
+            year: year,
             topic: topic,
             content: content,
             emoji: emoji,

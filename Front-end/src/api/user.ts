@@ -45,9 +45,9 @@ const signinUser = async (name: string, password: string) => {
     }
 }
 
-const getDiaryFromUser = async (month: string, userId: number) => {
+const getDiaryFromUser = async (month: string, year: string, userId: number) => {
     try {
-        const response = await Axios.get(`/users/diaries/${userId}/${month}`);
+        const response = await Axios.get(`/users/diaries/${userId}/${month}/${year}`);
         return {
             success: true,
             data: response.data

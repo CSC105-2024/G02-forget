@@ -129,6 +129,7 @@ exports.Prisma.DiaryScalarFieldEnum = {
   id: 'id',
   day: 'day',
   month: 'month',
+  year: 'year',
   topic: 'topic',
   content: 'content',
   emoji: 'emoji',

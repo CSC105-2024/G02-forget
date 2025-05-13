@@ -35,6 +35,7 @@ export function editTemplate(bgColor,secondaryBg,navColor,selected) {
 };
 
 const ChangeTemplate = () => {
+  const userAccount = parseInt(localStorage.getItem("userAccount"));
   // API
   const changeTemplate = async (id, template) => {
     const data = await apiUser.changeTemplate(id, template)
@@ -60,7 +61,7 @@ const ChangeTemplate = () => {
     };
 
     useEffect(() => {
-      fetchTemplate(1);
+      fetchTemplate(userAccount);
       }, []);
 
   const changeColor = (bgColor,secondaryBg,navColor,selected) => {
@@ -73,28 +74,28 @@ const ChangeTemplate = () => {
         document.documentElement.style.setProperty("--template-pink-border-width","1px");
         document.documentElement.style.setProperty("--template-yellow-border-width","0px");
         document.documentElement.style.setProperty("--template-orange-border-width","0px");
-        changeTemplate(1, "pink");
+        changeTemplate(userAccount, "pink");
         break;
       case 3:
         document.documentElement.style.setProperty("--template-default-border-width","0px");
         document.documentElement.style.setProperty("--template-pink-border-width","0px");
         document.documentElement.style.setProperty("--template-yellow-border-width","1px");
         document.documentElement.style.setProperty("--template-orange-border-width","0px");
-        changeTemplate(1, "yellow");
+        changeTemplate(userAccount, "yellow");
         break;
       case 4:
         document.documentElement.style.setProperty("--template-default-border-width","0px");
         document.documentElement.style.setProperty("--template-pink-border-width","0px");
         document.documentElement.style.setProperty("--template-yellow-border-width","0px");
         document.documentElement.style.setProperty("--template-orange-border-width","1px");
-        changeTemplate(1, "orange");
+        changeTemplate(userAccount, "orange");
         break;
       default:
         document.documentElement.style.setProperty("--template-default-border-width","1px");
         document.documentElement.style.setProperty("--template-pink-border-width","0px");
         document.documentElement.style.setProperty("--template-yellow-border-width","0px");
         document.documentElement.style.setProperty("--template-orange-border-width","0px");
-        changeTemplate(1, "white");
+        changeTemplate(userAccount, "white");
         break;
     }
   };

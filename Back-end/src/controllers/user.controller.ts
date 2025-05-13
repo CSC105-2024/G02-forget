@@ -116,8 +116,9 @@ const signinUser = async (c: Context) => {
 const getDiaryFromUser = async (c: Context) => {
 	try {
 		const userId = Number(c.req.param("id"));
-		const month = String(c.req.param("month"))
-		const diary = await userModel.getDiaryFromUser(month, userId);
+		const month = String(c.req.param("month"));
+		const year = String(c.req.param("year"));
+		const diary = await userModel.getDiaryFromUser(month, year, userId);
 		return c.json({
 			success: true,
 			data: diary

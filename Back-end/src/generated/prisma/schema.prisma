@@ -27,6 +27,7 @@ model Diary {
   id      Int     @id @default(autoincrement())
   day     Int
   month   String
+  year    String  @default("0")
   topic   String
   content String
   emoji   String

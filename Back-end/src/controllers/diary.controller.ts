@@ -12,9 +12,9 @@ import * as diaryModel from "../models/diary.model.ts";
 
 const createDairy = async (c: Context) => {
     try {
-        const { day, month, topic, content, emoji, userId } = await c.req.json();
+        const { day, month, year, topic, content, emoji, userId } = await c.req.json();
         // const user = c.get('user') as {user : {id : number}};
-        const newDiary = await diaryModel.createDiary(day, month, topic, content, emoji, userId);
+        const newDiary = await diaryModel.createDiary(day, month, year, topic, content, emoji, userId);
         return c.json({
             success: true,
             data: newDiary,

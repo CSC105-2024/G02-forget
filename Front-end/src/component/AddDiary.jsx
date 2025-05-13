@@ -45,16 +45,19 @@ const AddDiary = () => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [thisMonth, setThisMonth] = useState(0);
     const [showInvalidAdd, setShowInvalidAdd] = useState(false);
+
+    const userAccount = parseInt(localStorage.getItem("userAccount"));
+    
     
 
     // Backend
-    const addDiary = async (day, month, topic, content, emoji, userId) => {
-      await apiDiary.createDairy(day, month, topic, content, emoji, userId);
+    const addDiary = async (day, month, year, topic, content, emoji, userId) => {
+      await apiDiary.createDairy(day, month, year, topic, content, emoji, userId);
     }
 
     // getDiaryFromUser
-	const fetchDiaryData = async (month, userId) => {
-		const data = await apiUser.getDiaryFromUser(month, userId);
+	const fetchDiaryData = async (month, year, userId) => {
+		const data = await apiUser.getDiaryFromUser(month, year, userId);
 		if (data.success) {
 			setDiaries(data.data.data);
       console.log(data.data.data);
@@ -80,7 +83,7 @@ const AddDiary = () => {
   }
 
 	useEffect(() => {
-		fetchDiaryData(currentMonth.toLocaleString('default', { month: 'long'}), 1);
+		fetchDiaryData(currentMonth.toLocaleString('default', { month: 'long'}), currentMonth.toLocaleString('default', {year: 'numeric' }), userAccount);
     if (diaries.length > 0) {
       setShowDiary(true);
     } else {
@@ -248,7 +251,7 @@ const AddDiary = () => {
             lock: false,
           }
           setDiaries(prev => [...prev, newDiary]);
-          addDiary(newDiary.day, currentMonth.toLocaleString('default', { month: 'long'}), newDiary.topic, newDiary.text, newDiary.emoji, 1);
+          addDiary(newDiary.day, currentMonth.toLocaleString('default', { month: 'long'}), currentMonth.toLocaleString('default', {year: 'numeric' }), newDiary.topic, newDiary.text, newDiary.emoji, userAccount);
         }
 
         setShowDiary(true);
@@ -257,7 +260,10 @@ const AddDiary = () => {
         setSaveTopic("");
         setSaveTextareaValue("");
         setSelectMood("");
-        fetchDiaryData(currentMonth.toLocaleString('default', { month: 'long'}), 1);
+        fetchDiaryData(currentMonth.toLocaleString('default', { month: 'long'}),currentMonth.toLocaleString('default', {year: 'numeric' }) , userAccount);
+        console.log(userAccount);
+        
+        
         window.location.reload();
       }
       

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { use } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../component/Navbar';
 import QuietHappy from '../img/Quiethappy.png'
@@ -8,10 +8,23 @@ import { useEffect, useState } from 'react';
 import { MdNavigateNext } from "react-icons/md";
 import { MdNavigateBefore } from "react-icons/md";
 
+import RedEmoji from '../img/RedEmoji.png';
+import OrangeEmoji from '../img/OrangeEmoji.png';
+import YellowEmoji from '../img/YellowEmoji.png';
+import LightGreenEmoji from '../img/LightGreenEmoji.png';
+import GreenEmoji from '../img/GreenEmoji.png';
+import Emptybox from '../img/EmptyBox.png';
+
 const ProfilePage = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [resultText, setResultText] = useState("");
+  const [resultEmoji, setResultEmoji] = useState("");
+  const [showEmoji, setShowEmoji] = useState(true)
+
+  const userAccount = parseInt(localStorage.getItem("userAccount"));
+
   const fetchTemplate = async (id) => {
         const data = await apiUser.getTemplate(id);
         if (data.success) {
@@ -35,28 +48,73 @@ const ProfilePage = () => {
         setEmail(data.data.email);
       }
   };
-    
-      
-    useEffect(() => {
-      fetchTemplate(1);
-      fetchProfile(1);
-      
-    }, []);
-    
-  const navigate = useNavigate();
-
-  const handleSignOut = () => {
-    localStorage.removeItem('userToken');
-    navigate('/signin');
-  };
 
   function prevMonth() {
-    setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() - 1));
+    setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() - 1)); 
   }
 
   function nextMonth() {
     setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() + 1));
   }
+
+  const getResult = async (month, year, userId) => {
+    const data = await apiUser.getDiaryFromUser(month, year, userId);
+        if (data.success) {
+          let point = 0;
+          for (let i = 0; i < data.data.data.length; i++) {
+            if (data.data.data[i].emoji === "/src/img/GreenEmoji.png") {
+              point += 5;
+            } else if (data.data.data[i].emoji === "/src/img/LightGreenEmoji.png") {
+              point += 4;
+            } else if (data.data.data[i].emoji === "/src/img/YellowEmoji.png") {
+              point += 3;
+            } else if (data.data.data[i].emoji === "/src/img/OrangeEmoji.png") {
+              point += 2;
+            } else if (data.data.data[i].emoji === "/src/img/RedEmoji.png") {
+              point += 1;
+            }
+          }
+          setShowEmoji(true);
+          let result = Math.floor(point / data.data.data.length);
+          if (result === 5) {
+            setResultText("You look absolutely joyful!");
+            setResultEmoji(GreenEmoji);
+          } else if (result === 4) {
+            setResultText("You seem pleased with things");
+            setResultEmoji(LightGreenEmoji);
+          } else if (result === 3) {
+            setResultText("You look calm and collected");
+            setResultEmoji(YellowEmoji);
+          } else if (result === 2) {
+            setResultText("You look a bit downcast");
+            setResultEmoji(OrangeEmoji);
+          } else if (result === 1) {
+            setResultText("You look deeply depressed");
+            setResultEmoji(RedEmoji);
+          } else {
+            setResultText("Don't have diary in this month");
+            setShowEmoji(false);
+          }
+        }
+  }
+    
+      
+    useEffect(() => {
+      fetchTemplate(userAccount);
+      fetchProfile(userAccount);
+      getResult(currentMonth.toLocaleString('default', { month: 'long'}), currentMonth.toLocaleString('default', {year: 'numeric' }), userAccount);
+    }, []);
+
+    useEffect(() => {
+      getResult(currentMonth.toLocaleString('default', { month: 'long'}), currentMonth.toLocaleString('default', {year: 'numeric' }), userAccount);
+    }, [currentMonth])
+    
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    localStorage.removeItem("userAccount");
+    navigate('/signin');
+  };
 
   return (
       <div className='Background'>
@@ -79,8 +137,8 @@ const ProfilePage = () => {
           </div>
 
           <div className="bg-white p-2 rounded-xl shadow-lg flex flex-row items-center  w-[100%] h-60 text-center md:w-[90%] lg:p-6 lg:w-[50%]">
-            <img src={QuietHappy} alt="Quiethappy" className= "  w-25 lg:w-[264px]   "  />
-            <p className="text-[27px]  font-bold font-[Rajdhani] mt-4 w-[100%]  text-center lg:text-[56px]">You look Quite happy</p>
+            {showEmoji && <img src={resultEmoji} className= "  w-25 lg:w-[264px]   "  />}
+            <p className="text-[27px]  font-bold font-[Rajdhani] mt-4 w-[100%]  text-center lg:text-[56px]">{resultText}</p>
           </div>
 
           <div className=" flex flex-row justify-center w-[100%] lg:justify-start"> 

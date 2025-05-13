@@ -1,8 +1,8 @@
 import { Axios } from "../axiosInstance";
 
-const createDairy = async (day: number, month: string, topic: string, content: string, emoji: string, userId: number) => {
+const createDairy = async (day: number, month: string, year: string, topic: string, content: string, emoji: string, userId: number) => {
     try {
-        await Axios.post("/diaries", {day: day, month: month, topic: topic, content: content, emoji: emoji, userId: userId});
+        await Axios.post("/diaries", {day: day, month: month, year: year, topic: topic, content: content, emoji: emoji, userId: userId});
     } catch (e) {
         console.log(e);
         return {

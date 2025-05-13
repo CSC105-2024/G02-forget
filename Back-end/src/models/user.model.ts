@@ -45,10 +45,11 @@ const getInfoUser = async (id: number) => {
     return user;
 }
 
-const getDiaryFromUser = async (month: string, userId: number) => {
+const getDiaryFromUser = async (month: string, year: string, userId: number) => {
     const diary = await db.diary.findMany({
         where: {
             month: month,
+            year: year,
             userId: userId
         }
     })

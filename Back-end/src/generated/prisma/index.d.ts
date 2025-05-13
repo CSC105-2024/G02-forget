@@ -2120,6 +2120,7 @@ export namespace Prisma {
     id: number | null
     day: number | null
     month: string | null
+    year: string | null
     topic: string | null
     content: string | null
     emoji: string | null
@@ -2131,6 +2132,7 @@ export namespace Prisma {
     id: number | null
     day: number | null
     month: string | null
+    year: string | null
     topic: string | null
     content: string | null
     emoji: string | null
@@ -2142,6 +2144,7 @@ export namespace Prisma {
     id: number
     day: number
     month: number
+    year: number
     topic: number
     content: number
     emoji: number
@@ -2167,6 +2170,7 @@ export namespace Prisma {
     id?: true
     day?: true
     month?: true
+    year?: true
     topic?: true
     content?: true
     emoji?: true
@@ -2178,6 +2182,7 @@ export namespace Prisma {
     id?: true
     day?: true
     month?: true
+    year?: true
     topic?: true
     content?: true
     emoji?: true
@@ -2189,6 +2194,7 @@ export namespace Prisma {
     id?: true
     day?: true
     month?: true
+    year?: true
     topic?: true
     content?: true
     emoji?: true
@@ -2287,6 +2293,7 @@ export namespace Prisma {
     id: number
     day: number
     month: string
+    year: string
     topic: string
     content: string
     emoji: string
@@ -2317,6 +2324,7 @@ export namespace Prisma {
     id?: boolean
     day?: boolean
     month?: boolean
+    year?: boolean
     topic?: boolean
     content?: boolean
     emoji?: boolean
@@ -2329,6 +2337,7 @@ export namespace Prisma {
     id?: boolean
     day?: boolean
     month?: boolean
+    year?: boolean
     topic?: boolean
     content?: boolean
     emoji?: boolean
@@ -2341,6 +2350,7 @@ export namespace Prisma {
     id?: boolean
     day?: boolean
     month?: boolean
+    year?: boolean
     topic?: boolean
     content?: boolean
     emoji?: boolean
@@ -2353,6 +2363,7 @@ export namespace Prisma {
     id?: boolean
     day?: boolean
     month?: boolean
+    year?: boolean
     topic?: boolean
     content?: boolean
     emoji?: boolean
@@ -2360,7 +2371,7 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type DiaryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "day" | "month" | "topic" | "content" | "emoji" | "lock" | "userId", ExtArgs["result"]["diary"]>
+  export type DiaryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "day" | "month" | "year" | "topic" | "content" | "emoji" | "lock" | "userId", ExtArgs["result"]["diary"]>
   export type DiaryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2380,6 +2391,7 @@ export namespace Prisma {
       id: number
       day: number
       month: string
+      year: string
       topic: string
       content: string
       emoji: string
@@ -2812,6 +2824,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Diary", 'Int'>
     readonly day: FieldRef<"Diary", 'Int'>
     readonly month: FieldRef<"Diary", 'String'>
+    readonly year: FieldRef<"Diary", 'String'>
     readonly topic: FieldRef<"Diary", 'String'>
     readonly content: FieldRef<"Diary", 'String'>
     readonly emoji: FieldRef<"Diary", 'String'>
@@ -3255,6 +3268,7 @@ export namespace Prisma {
     id: 'id',
     day: 'day',
     month: 'month',
+    year: 'year',
     topic: 'topic',
     content: 'content',
     emoji: 'emoji',
@@ -3373,6 +3387,7 @@ export namespace Prisma {
     id?: IntFilter<"Diary"> | number
     day?: IntFilter<"Diary"> | number
     month?: StringFilter<"Diary"> | string
+    year?: StringFilter<"Diary"> | string
     topic?: StringFilter<"Diary"> | string
     content?: StringFilter<"Diary"> | string
     emoji?: StringFilter<"Diary"> | string
@@ -3385,6 +3400,7 @@ export namespace Prisma {
     id?: SortOrder
     day?: SortOrder
     month?: SortOrder
+    year?: SortOrder
     topic?: SortOrder
     content?: SortOrder
     emoji?: SortOrder
@@ -3400,6 +3416,7 @@ export namespace Prisma {
     NOT?: DiaryWhereInput | DiaryWhereInput[]
     day?: IntFilter<"Diary"> | number
     month?: StringFilter<"Diary"> | string
+    year?: StringFilter<"Diary"> | string
     topic?: StringFilter<"Diary"> | string
     content?: StringFilter<"Diary"> | string
     emoji?: StringFilter<"Diary"> | string
@@ -3412,6 +3429,7 @@ export namespace Prisma {
     id?: SortOrder
     day?: SortOrder
     month?: SortOrder
+    year?: SortOrder
     topic?: SortOrder
     content?: SortOrder
     emoji?: SortOrder
@@ -3431,6 +3449,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Diary"> | number
     day?: IntWithAggregatesFilter<"Diary"> | number
     month?: StringWithAggregatesFilter<"Diary"> | string
+    year?: StringWithAggregatesFilter<"Diary"> | string
     topic?: StringWithAggregatesFilter<"Diary"> | string
     content?: StringWithAggregatesFilter<"Diary"> | string
     emoji?: StringWithAggregatesFilter<"Diary"> | string
@@ -3498,6 +3517,7 @@ export namespace Prisma {
   export type DiaryCreateInput = {
     day: number
     month: string
+    year?: string
     topic: string
     content: string
     emoji: string
@@ -3509,6 +3529,7 @@ export namespace Prisma {
     id?: number
     day: number
     month: string
+    year?: string
     topic: string
     content: string
     emoji: string
@@ -3519,6 +3540,7 @@ export namespace Prisma {
   export type DiaryUpdateInput = {
     day?: IntFieldUpdateOperationsInput | number
     month?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
     topic?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     emoji?: StringFieldUpdateOperationsInput | string
@@ -3530,6 +3552,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     day?: IntFieldUpdateOperationsInput | number
     month?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
     topic?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     emoji?: StringFieldUpdateOperationsInput | string
@@ -3541,6 +3564,7 @@ export namespace Prisma {
     id?: number
     day: number
     month: string
+    year?: string
     topic: string
     content: string
     emoji: string
@@ -3551,6 +3575,7 @@ export namespace Prisma {
   export type DiaryUpdateManyMutationInput = {
     day?: IntFieldUpdateOperationsInput | number
     month?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
     topic?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     emoji?: StringFieldUpdateOperationsInput | string
@@ -3561,6 +3586,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     day?: IntFieldUpdateOperationsInput | number
     month?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
     topic?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     emoji?: StringFieldUpdateOperationsInput | string
@@ -3682,6 +3708,7 @@ export namespace Prisma {
     id?: SortOrder
     day?: SortOrder
     month?: SortOrder
+    year?: SortOrder
     topic?: SortOrder
     content?: SortOrder
     emoji?: SortOrder
@@ -3699,6 +3726,7 @@ export namespace Prisma {
     id?: SortOrder
     day?: SortOrder
     month?: SortOrder
+    year?: SortOrder
     topic?: SortOrder
     content?: SortOrder
     emoji?: SortOrder
@@ -3710,6 +3738,7 @@ export namespace Prisma {
     id?: SortOrder
     day?: SortOrder
     month?: SortOrder
+    year?: SortOrder
     topic?: SortOrder
     content?: SortOrder
     emoji?: SortOrder
@@ -3888,6 +3917,7 @@ export namespace Prisma {
   export type DiaryCreateWithoutUserInput = {
     day: number
     month: string
+    year?: string
     topic: string
     content: string
     emoji: string
@@ -3898,6 +3928,7 @@ export namespace Prisma {
     id?: number
     day: number
     month: string
+    year?: string
     topic: string
     content: string
     emoji: string
@@ -3936,6 +3967,7 @@ export namespace Prisma {
     id?: IntFilter<"Diary"> | number
     day?: IntFilter<"Diary"> | number
     month?: StringFilter<"Diary"> | string
+    year?: StringFilter<"Diary"> | string
     topic?: StringFilter<"Diary"> | string
     content?: StringFilter<"Diary"> | string
     emoji?: StringFilter<"Diary"> | string
@@ -3993,6 +4025,7 @@ export namespace Prisma {
     id?: number
     day: number
     month: string
+    year?: string
     topic: string
     content: string
     emoji: string
@@ -4002,6 +4035,7 @@ export namespace Prisma {
   export type DiaryUpdateWithoutUserInput = {
     day?: IntFieldUpdateOperationsInput | number
     month?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
     topic?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     emoji?: StringFieldUpdateOperationsInput | string
@@ -4012,6 +4046,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     day?: IntFieldUpdateOperationsInput | number
     month?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
     topic?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     emoji?: StringFieldUpdateOperationsInput | string
@@ -4022,6 +4057,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     day?: IntFieldUpdateOperationsInput | number
     month?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
     topic?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     emoji?: StringFieldUpdateOperationsInput | string
