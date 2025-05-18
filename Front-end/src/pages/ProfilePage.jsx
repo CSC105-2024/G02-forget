@@ -1,7 +1,6 @@
 import React, { use } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../component/Navbar';
-import QuietHappy from '../img/Quiethappy.png'
 import * as apiUser from "../api/user"
 import { editTemplate } from '../component/ChangeTemplate'
 import { useEffect, useState } from 'react';

@@ -9,9 +9,27 @@
   --template-yellow-border-width:0px;
   --template-orange-border-width:0px;
 
+  --template-example-color:1;
+
   --template-example-1-button:#000000;
   --template-example-2-button:#FFFFFF;
   --template-example-3-button:#FFFFFF;
+  
+  --template-example-pic-default-1:visible;
+  --template-example-pic-default-2:hidden;
+  --template-example-pic-default-3:hidden;
+  
+  --template-example-pic-pink-1:visible;
+  --template-example-pic-pink-2:hidden;
+  --template-example-pic-pink-3:hidden;
+  
+  --template-example-pic-yellow-1:visible;
+  --template-example-pic-yellow-2:hidden;
+  --template-example-pic-yellow-3:hidden;
+  
+  --template-example-pic-orange-1:visible;
+  --template-example-pic-orange-2:hidden;
+  --template-example-pic-orange-3:hidden;
 }
 * {
   box-sizing: border-box;
