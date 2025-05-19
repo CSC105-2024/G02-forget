@@ -130,7 +130,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\kawin\\Dropbox\\My PC (LAPTOP-59KBJNQV)\\Desktop\\KMUTT_WORK\\CSC105 - Web\\Clone-Project\\G02-forget\\Back-end\\src\\generated\\prisma",
+      "value": "C:\\Users\\PC\\OneDrive\\เอกสาร\\GitHub\\G02-forget\\Back-end\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -144,7 +144,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\kawin\\Dropbox\\My PC (LAPTOP-59KBJNQV)\\Desktop\\KMUTT_WORK\\CSC105 - Web\\Clone-Project\\G02-forget\\Back-end\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\PC\\OneDrive\\เอกสาร\\GitHub\\G02-forget\\Back-end\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -158,11 +158,12 @@ const config = {
     "db"
   ],
   "activeProvider": "sqlite",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "file:./dev.db"
+        "value": null
       }
     }
   },

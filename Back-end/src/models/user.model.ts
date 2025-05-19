@@ -1,81 +1,78 @@
-import { db } from "../index.ts";
+import { PrismaClient } from "../generated/prisma/index.js";
 
-const isDuplicate = async( username: string, email: string ) => {
-    const user = await db.user.findFirst({
-        where: {
-            username: username,
-            email: email,
-        },
-    });
-    return user;
-}
+const prisma = new PrismaClient()
+ const createUser = async (username: string, email: string, password: string) => {
+  return await prisma.user.create({
+    data: {
+      username,
+      email,
+      password,
+    },
+  });
+};
 
-const signinUser = async ( name: string, password: string) => {
-    const user = await db.user.findFirst({
-        where: {
-            OR : [ {username : name },{ email : name } ],
-            password: password
-            }
-    })
-    return user;   
-}
-
-const createUser = async( username: string, email: string, password: string ) => {
-    const user = await db.user.create({
-        data: {
-            username: username,
-            email: email,
-            password: password,
-        },
-    });
-    return user;
-}
+ const isDuplicate = async (username: string, email: string) => {
+   const existing = await prisma.user.findFirst({
+     where: {
+       OR: [{ username }, { email }],
+     },
+   });
+   return !!existing;
+};
 
 const getAllUser = async () => {
-    const user = await db.user.findMany();
-    return user;
-}
+  return await prisma.user.findMany({
+    select: {
+      id: true,
+      username: true,
+      email: true,
+      template: true,
+    },
+  });
+};
 
 const getInfoUser = async (id: number) => {
-    const user = await db.user.findFirst({
-        where: {
-            id: id
-        }
-    })
-    return user;
-}
+  return await prisma.user.findUnique({
+    where: { id },
+    select: {
+      id: true,
+      username: true,
+      email: true,
+      template: true,
+    },
+  });
+};
+
+const findByUsernameOrEmail = async (name: string) => {
+  return await prisma.user.findFirst({
+    where: {
+      OR: [{ username: name }, { email: name }],
+    },
+  });
+};
 
 const getDiaryFromUser = async (month: string, year: string, userId: number) => {
-    const diary = await db.diary.findMany({
-        where: {
-            month: month,
-            year: year,
-            userId: userId
-        }
-    })
-    return diary;
-}
+  return await prisma.diary.findMany({
+    where: {
+      userId,
+      month,
+      year,
+    },
+  });
+};
 
-const changeTemplate = async (id: number, template: string) => {
-    const user = await db.user.update({
-        where: {
-            id: id
-        },
-        data: {
-            template: template
-        }
-    })
-    return user;
-}
+ const changeTemplate = async (id: number, template: string) => {
+  return await prisma.user.update({
+    where: { id },
+    data: { template },
+  });
+};
 
-const getTemplate = async (id: number) => {
-    const user = await db.user.findFirst({
-        where: {
-            id: id
-        }
-    })
-    return user;
-}
+ const getTemplate = async (id: number) => {
+  return await prisma.user.findUnique({
+    where: { id },
+    select: { id: true, template: true },
+  });
 
-
-export { isDuplicate, createUser, getAllUser, getInfoUser, signinUser, getDiaryFromUser, changeTemplate, getTemplate}
+};
+export {createUser,isDuplicate,getAllUser,getInfoUser,findByUsernameOrEmail,getDiaryFromUser,changeTemplate,getTemplate}
