@@ -2,21 +2,31 @@ import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import { PrismaClient } from './generated/prisma/index.js'
 import { mainRouter } from './routes/index.route.ts'
-import { cors } from 'hono/cors'
+import "dotenv/config";
+import { authMiddleware } from './middlewares/auth.middleware.ts';
+
 
 const app = new Hono()
 export const db = new PrismaClient();
+app.use('/protected/*', authMiddleware);  
+app.use('/users/me', authMiddleware);     
+app.use('/users/logout', authMiddleware);    
+app.use('*', async (c, next) => {
+  c.res.headers.set('Access-Control-Allow-Origin', 'http://localhost:5173')
+  c.res.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH')
+  c.res.headers.set('Access-Control-Allow-Headers', 'Content-Type')
+  c.res.headers.set('Access-Control-Allow-Credentials','true')
 
-app.use(
-	cors({
-		origin: ['http://localhost:5173'], // Your frontend application
-	})
-);
+  if (c.req.method === 'OPTIONS') {
+    return c.json({}, 200)
+  }
+
+  return next()
+})
 
 app.get('/', (c) => {
   return c.text('Hello Hono!')
 })
-
 app.route("", mainRouter);
 
 db.$connect()
