@@ -89,6 +89,7 @@ const getInfoUser = async (c: Context) => {
 }
 const signinUser = async (c: Context) => {
   try {
+    console.log(process.env.JWT_SECRET!)
     const { name, password } = await c.req.json();
     const user = await userModel.findByUsernameOrEmail(name);
     if (!user) {
@@ -103,7 +104,7 @@ const signinUser = async (c: Context) => {
     });
     c.header("Set-Cookie", `token=${token}; HttpOnly; Path=/; Max-Age=604800`);
     c.set("user", user);
-
+      
     return c.json({
       success: true,
       data: {
