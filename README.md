@@ -69,7 +69,7 @@ cd G02-forget
 | GET   | `/user/getProfile/me`               |  Get profile of the currently logged-in user |
 | POST  | `/user/logoutUser/logout`           |  Log out the current user                   |
 
-### People
+### Diary
 
 | Method | Endpoint                            | Description                                                  |
 |--------|-------------------------------------|--------------------------------------------------------------|
